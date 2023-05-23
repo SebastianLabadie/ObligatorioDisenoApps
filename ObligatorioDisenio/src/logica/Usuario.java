@@ -9,18 +9,18 @@ package logica;
  * @author PC
  */
 public abstract class Usuario {
-    private String nombre;
+    private String cedula;
     private String nombreCompleto;
     private String password;
 
-    public Usuario(String nombre, String nombreCompleto, String password) {
-        this.nombre = nombre;
+    public Usuario(String cedula, String nombreCompleto, String password) {
+        this.cedula = cedula;
         this.nombreCompleto = nombreCompleto;
         this.password = password;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getCedula() {
+        return cedula;
     }
 
     public String getNombreCompleto() {
