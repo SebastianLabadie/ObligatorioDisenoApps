@@ -9,12 +9,12 @@
             <Property name="text" type="java.lang.String" value="Ejecutar"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="itemAgenda">
+            <MenuItem class="javax.swing.JMenuItem" name="itemPropietario">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Agenda"/>
+                <Property name="text" type="java.lang.String" value="Propietario"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemAgendaActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemPropietarioActionPerformed"/>
               </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="itemAdministracion">
@@ -32,7 +32,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="title" type="java.lang.String" value="TESING APLICACION"/>
+    <Property name="title" type="java.lang.String" value="MENU APLICACION"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>

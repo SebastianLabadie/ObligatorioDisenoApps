@@ -8,12 +8,12 @@ package iuEscritorio;
  *
  * @author PC
  */
-public class TestingAplicacion extends javax.swing.JFrame {
+public class MenuAplicacion extends javax.swing.JFrame {
 
     /**
      * Creates new form TestingAplicacion
      */
-    public TestingAplicacion() {
+    public MenuAplicacion() {
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -29,21 +29,21 @@ public class TestingAplicacion extends javax.swing.JFrame {
 
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        itemAgenda = new javax.swing.JMenuItem();
+        itemPropietario = new javax.swing.JMenuItem();
         itemAdministracion = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("TESING APLICACION");
+        setTitle("MENU APLICACION");
 
         jMenu1.setText("Ejecutar");
 
-        itemAgenda.setText("Agenda");
-        itemAgenda.addActionListener(new java.awt.event.ActionListener() {
+        itemPropietario.setText("Propietario");
+        itemPropietario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemAgendaActionPerformed(evt);
+                itemPropietarioActionPerformed(evt);
             }
         });
-        jMenu1.add(itemAgenda);
+        jMenu1.add(itemPropietario);
 
         itemAdministracion.setText("Administracion");
         itemAdministracion.addActionListener(new java.awt.event.ActionListener() {
@@ -71,21 +71,21 @@ public class TestingAplicacion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void itemAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAgendaActionPerformed
+    private void itemPropietarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemPropietarioActionPerformed
         // TODO add your handling code here:
-//        new LoginAgenda(null,false).setVisible(true);
-    }//GEN-LAST:event_itemAgendaActionPerformed
+        new LoginPropietario(null,false).setVisible(true);
+    }//GEN-LAST:event_itemPropietarioActionPerformed
 
     private void itemAdministracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAdministracionActionPerformed
         // TODO add your handling code here:
-//         new LoginAdministrador(null,false).setVisible(true);
+         new LoginAdministrador(null,false).setVisible(true);
     }//GEN-LAST:event_itemAdministracionActionPerformed
 
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem itemAdministracion;
-    private javax.swing.JMenuItem itemAgenda;
+    private javax.swing.JMenuItem itemPropietario;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables

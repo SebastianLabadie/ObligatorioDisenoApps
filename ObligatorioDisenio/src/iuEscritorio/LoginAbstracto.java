@@ -6,8 +6,6 @@
 package iuEscritorio;
 
 import javax.swing.JOptionPane;
-import logica.Conexion;
-import logica.Fachada;
 
 
 /**
@@ -37,14 +35,14 @@ public abstract  class LoginAbstracto extends javax.swing.JDialog {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        tfNombre = new javax.swing.JTextField();
+        tfCedula = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         bLogin = new javax.swing.JButton();
         tfPassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("Nombre:");
+        jLabel1.setText("Cedula:");
 
         jLabel2.setText("Contraseña:");
 
@@ -76,7 +74,7 @@ public abstract  class LoginAbstracto extends javax.swing.JDialog {
                             .addComponent(jLabel1))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tfNombre)
+                            .addComponent(tfCedula)
                             .addComponent(tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(45, Short.MAX_VALUE))
         );
@@ -86,7 +84,7 @@ public abstract  class LoginAbstracto extends javax.swing.JDialog {
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(tfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -115,12 +113,12 @@ public abstract  class LoginAbstracto extends javax.swing.JDialog {
     private javax.swing.JButton bLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField tfNombre;
+    private javax.swing.JTextField tfCedula;
     private javax.swing.JPasswordField tfPassword;
     // End of variables declaration//GEN-END:variables
 
     private void login() {
-        String nom = tfNombre.getText();
+        String nom = tfCedula.getText();
         String pass = new String(tfPassword.getPassword());
         Object obj= llamarLogin(nom, pass);
         if(obj==null){

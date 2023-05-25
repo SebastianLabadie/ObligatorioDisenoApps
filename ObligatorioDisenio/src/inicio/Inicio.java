@@ -4,14 +4,16 @@
  */
 package inicio;
 
+import iuEscritorio.MenuAplicacion;
+
 /**
  *
  * @author sebastianlb
  */
 public class Inicio {
     public static void main(String[] args) {
-//         DatosPrueba.cargar();
+         DatosPrueba.cargar();
         //DatosPrueba.probar();
-//        new TestingAplicacion().setVisible(true);
+        new MenuAplicacion().setVisible(true);
     }
 }
