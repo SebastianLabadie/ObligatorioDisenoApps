@@ -4,6 +4,7 @@
  */
 package logica;
 
+import Exceptions.LoginException;
 import java.util.ArrayList;
 
 /**
@@ -12,32 +13,35 @@ import java.util.ArrayList;
  */
 public class SistemaAcceso {
     
-    private ArrayList<UsuarioPropietario> usuariosAgenda = new ArrayList();
+    private ArrayList<UsuarioPropietario> usuariosPropietarios = new ArrayList();
     private ArrayList<UsuarioAdministrador> usuariosAdministradores = new ArrayList();
     private ArrayList<Conexion> conexiones = new ArrayList();
     
-    public void agreagarUsuarioPropietario(String cedula,String pwd,String nc){
-        usuariosAgenda.add(new UsuarioPropietario(cedula, nc, pwd));
+    public UsuarioPropietario agregarUsuarioPropietario(String cedula,String pwd,String nc,int saldo){
+        UsuarioPropietario u = new UsuarioPropietario(cedula, nc, pwd,saldo);
+        usuariosPropietarios.add(u);
+        return u;
     }
-    public void agreagarUsuarioAdministrador(String cedula,String pwd,String nc){
-        usuariosAdministradores.add(new UsuarioAdministrador(cedula, nc, pwd));
+    
+    public UsuarioAdministrador agregarUsuarioAdministrador(String cedula,String pwd,String nc){
+        UsuarioAdministrador u = new UsuarioAdministrador(cedula, nc, pwd);
+        usuariosAdministradores.add(u);
+        return u;
     }
-    public UsuarioPropietario loginPropietario(String cedula,String pwd){
-        Usuario u = login(cedula,pwd,usuariosAgenda);
+    public UsuarioPropietario loginPropietario(String cedula,String pwd) throws LoginException{
+        Usuario u = login(cedula,pwd,usuariosPropietarios);
         return (UsuarioPropietario)u;
     }
     
-    public Conexion loginAdministrador(String cedula,String pwd){
+    public Conexion loginAdministrador(String cedula,String pwd) throws LoginException{
         Usuario u = login(cedula,pwd,usuariosAdministradores);
-        Conexion c = null;
-        if(!administradorYaConectado(u)){
-            c = new Conexion((UsuarioAdministrador)u);
-            conexiones.add(c);
+        administradorYaConectado(u);
+        Conexion c = new Conexion((UsuarioAdministrador)u);
+        conexiones.add(c);
 //            Fachada.getInstancia().avisar(Fachada.eventos.cambioListaConexiones);
-        }
         return c;
     }
-    private Usuario login(String cedula,String pwd,ArrayList usuarios){
+    private Usuario login(String cedula,String pwd,ArrayList usuarios) throws LoginException{
         Usuario u;
         for(Object o:usuarios){
             u = (Usuario)o;
@@ -45,19 +49,16 @@ public class SistemaAcceso {
                 return u;
             }
         }
-        return null;
+        throw new LoginException("Acceso denegado");
     } 
     
-    public boolean administradorYaConectado(Usuario u){
-        if (u==null)  return true;
-        
+    public void administradorYaConectado(Usuario u) throws LoginException{
         for (Conexion c: conexiones) {
             if (c.getUsuario().getCedula().equals(u.getCedula())) {
-                return true;
+               throw new LoginException("Ud. Ya está logueado");
             }
         }
         
-        return false;
     }
 
     public ArrayList<Conexion> getConexiones() {

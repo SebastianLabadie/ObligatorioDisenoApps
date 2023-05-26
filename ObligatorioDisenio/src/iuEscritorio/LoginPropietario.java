@@ -4,9 +4,11 @@
  */
 package iuEscritorio;
 
+import Exceptions.LoginException;
 import java.awt.Frame;
 import logica.Conexion;
 import logica.Fachada;
+import logica.UsuarioPropietario;
 
 /**
  *
@@ -20,13 +22,13 @@ public class LoginPropietario extends LoginAbstracto{
 
     
     @Override
-    public Object llamarLogin(String cedula, String pass) {
+    public Object llamarLogin(String cedula, String pass) throws LoginException {
         return Fachada.getInstancia().loginPropietario(cedula, pass);
     }
 
     @Override
     public void mostrarProximoCasoUso(Object obj) {
-//        new MenuAgenda((Conexion)obj).setVisible(true);
+        new TableroDeControl((UsuarioPropietario)obj).setVisible(true);
     }
     
 }

@@ -4,14 +4,35 @@
  */
 package logica;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author PC
  */
 public class UsuarioPropietario extends Usuario{
+    private ArrayList<Vehiculo> vehiculos;
+    private int saldo;
+    
 
-    public UsuarioPropietario(String cedula, String nombreCompleto, String password) {
+    public UsuarioPropietario(String cedula, String nombreCompleto, String password,int saldo) {
         super(cedula, nombreCompleto, password);
+        this.saldo = saldo;
+        this.vehiculos = new ArrayList<>();
+    }
+
+    public ArrayList<Vehiculo> getVehiculos() {
+        return vehiculos;
+    }
+
+    public int getSaldo() {
+        return saldo;
+    }
+    
+    
+    
+    public void asociarVehiculo(Vehiculo v){
+        vehiculos.add(v);
     }
  
     

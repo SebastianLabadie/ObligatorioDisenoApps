@@ -5,6 +5,9 @@
  */
 package iuEscritorio;
 
+import Exceptions.LoginException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 
@@ -118,18 +121,19 @@ public abstract  class LoginAbstracto extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void login() {
-        String nom = tfCedula.getText();
-        String pass = new String(tfPassword.getPassword());
-        Object obj= llamarLogin(nom, pass);
-        if(obj==null){
-            JOptionPane.showMessageDialog(this, "Login incorrecto");
-        }else{
+        try {
+            String cedula = tfCedula.getText();
+            String pass = new String(tfPassword.getPassword());
+            Object obj= llamarLogin(cedula, pass);
+            
             setVisible(false);
             mostrarProximoCasoUso(obj);
+        } catch (LoginException ex) {
+            JOptionPane.showMessageDialog(this,ex.getMessage());
         }
        
     }
-    public abstract Object llamarLogin(String nom, String pass);
+    public abstract Object llamarLogin(String nom, String pass) throws LoginException;
     public abstract void mostrarProximoCasoUso(Object obj);
      
     

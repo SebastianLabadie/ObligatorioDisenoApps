@@ -4,6 +4,7 @@
  */
 package iuEscritorio;
 
+import Exceptions.LoginException;
 import java.awt.Frame;
 import logica.Conexion;
 import logica.Fachada;
@@ -20,7 +21,7 @@ public class LoginAdministrador extends LoginAbstracto{
 
     
     @Override
-    public Object llamarLogin(String cedula, String pass) {
+    public Object llamarLogin(String cedula, String pass) throws LoginException  {
         return Fachada.getInstancia().loginAdministrador(cedula, pass);
     }
 

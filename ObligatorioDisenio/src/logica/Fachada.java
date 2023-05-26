@@ -4,6 +4,8 @@
  */
 package logica;
 
+import Exceptions.DuplicadoException;
+import Exceptions.LoginException;
 import java.util.ArrayList;
 import observador.Observable;
 
@@ -16,7 +18,7 @@ public class Fachada extends Observable{
     public enum eventos{cambioListaConexiones};
     
     private SistemaAcceso sAcceso = new SistemaAcceso();
-//    private SistemaAgendas sAgendas = new SistemaAgendas();
+    private SistemaTransito sTransito = new SistemaTransito();
     
     private static Fachada instancia = new Fachada();
 
@@ -28,30 +30,25 @@ public class Fachada extends Observable{
     private Fachada() {
     }
 
-    public void agreagarUsuarioPropietario(String cedula, String pwd, String nc) {
-        sAcceso.agreagarUsuarioPropietario(cedula, pwd, nc);
+    public UsuarioPropietario agregarUsuarioPropietario(String cedula, String pwd, String nc,int saldo) {
+        return sAcceso.agregarUsuarioPropietario(cedula, pwd, nc,saldo);
     }
-    public void agreagarUsuarioAdministrador(String cedula, String pwd, String nc) {
-        sAcceso.agreagarUsuarioAdministrador(cedula, pwd, nc);
+    public UsuarioAdministrador agregarUsuarioAdministrador(String cedula, String pwd, String nc) {
+        return sAcceso.agregarUsuarioAdministrador(cedula, pwd, nc);
     }
 
-    public UsuarioPropietario loginPropietario(String cedula, String pwd) {
+    public UsuarioPropietario loginPropietario(String cedula, String pwd) throws LoginException {
         return sAcceso.loginPropietario(cedula, pwd);
             
     }
 
-    public Conexion loginAdministrador(String cedula, String pwd) {
+    public Conexion loginAdministrador(String cedula, String pwd) throws LoginException {
         return sAcceso.loginAdministrador(cedula, pwd);
     }
     
-
-//    public ArrayList<TipoContacto> getTiposContacto() {
-//        return sAgendas.getTiposContacto();
-//    }
-//
-//    public void agregarTipoContacto(String nombre) {
-//        sAgendas.agregarTipoContacto(nombre);
-//    }
+    public Vehiculo agregarVehiculo(String matricula, String color, String modelo) throws DuplicadoException{
+       return  sTransito.agregarVehiculo(matricula, color, modelo);
+    }
 
     public ArrayList<Conexion> getConexiones() {
         return sAcceso.getConexiones();
@@ -60,15 +57,6 @@ public class Fachada extends Observable{
     public void logout(Conexion c) {
         sAcceso.logout(c);
     }
-//
-//    public ArrayList<TipoTelefono> getTiposTelefono() {
-//        return sAgendas.getTiposTelefono();
-//    }
-//
-//    public void agregarTipoTelefono(String nombre) {
-//        sAgendas.agregarTipoTelefono(nombre);
-//    }
-//    
-    
+
     
 }
