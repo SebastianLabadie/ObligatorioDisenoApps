@@ -5,6 +5,7 @@
 package iuEscritorio;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import javax.swing.table.DefaultTableModel;
 import logica.UsuarioPropietario;
 
@@ -43,6 +44,10 @@ public class TableroDeControl extends javax.swing.JFrame {
         lCantVehiculos = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaVehiculos = new javax.swing.JTable();
+        lCantVehiculos1 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        SaldoTable = new javax.swing.JTable();
+        btnRecargar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,6 +66,29 @@ public class TableroDeControl extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(tablaVehiculos);
 
+        lCantVehiculos1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        lCantVehiculos1.setText("Saldo");
+
+        SaldoTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(SaldoTable);
+
+        btnRecargar.setText("Recargar");
+        btnRecargar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRecargarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -75,14 +103,24 @@ public class TableroDeControl extends javax.swing.JFrame {
                 .addGap(26, 26, 26))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(50, 50, 50)
                         .addComponent(lCantVehiculos)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(25, Short.MAX_VALUE)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 904, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 904, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lCantVehiculos1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(btnRecargar)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 838, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(18, 18, 18))
         );
         layout.setVerticalGroup(
@@ -99,11 +137,23 @@ public class TableroDeControl extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lCantVehiculos)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(303, Short.MAX_VALUE))
+                .addGap(87, 87, 87)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lCantVehiculos1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnRecargar)))
+                .addContainerGap(297, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnRecargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecargarActionPerformed
+        // TODO add your handling code here:
+        new RecargarSaldo(usuario).setVisible(true);
+    }//GEN-LAST:event_btnRecargarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -132,13 +182,38 @@ public class TableroDeControl extends javax.swing.JFrame {
 //            fila++;
 //        }
         tablaVehiculos.setModel(datos);
+        
+        //CARGO TABLA 
+        DefaultTableModel tblsaldo = new DefaultTableModel();
+        tblsaldo.addColumn("Fecha Recarga");
+        tblsaldo.addColumn("Monto");
+        tblsaldo.addColumn("Estado");
+        tblsaldo.addColumn("Administrador");
+        
+        tblsaldo.setRowCount(1);
+        fila = 0;
+//        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+//        for(Dialogo d:dialogos){
+            tblsaldo.setValueAt(LocalDateTime.now(), fila, 0);
+            tblsaldo.setValueAt("500", fila, 1);
+            tblsaldo.setValueAt("PENDIENTE", fila, 2);
+            tblsaldo.setValueAt("PEPE", fila, 3);
+            
+//      
+//            fila++;
+//        }
+        SaldoTable.setModel(tblsaldo);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable SaldoTable;
+    private javax.swing.JButton btnRecargar;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel l1;
     private javax.swing.JLabel lCantVehiculos;
+    private javax.swing.JLabel lCantVehiculos1;
     private javax.swing.JLabel lNombreUsuario;
     private javax.swing.JLabel lSaldoUsuario;
     private javax.swing.JTable tablaVehiculos;

@@ -12,6 +12,7 @@ import java.util.ArrayList;
  */
 public class UsuarioPropietario extends Usuario{
     private ArrayList<Vehiculo> vehiculos;
+    private ArrayList<Recarga> recargas;
     private int saldo;
     
 
@@ -28,8 +29,10 @@ public class UsuarioPropietario extends Usuario{
     public int getSaldo() {
         return saldo;
     }
-    
-    
+
+    public ArrayList<Recarga> getRecargas() {
+        return recargas;
+    }
     
     public void asociarVehiculo(Vehiculo v){
         vehiculos.add(v);
