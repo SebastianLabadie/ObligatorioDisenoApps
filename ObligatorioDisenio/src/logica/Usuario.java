@@ -30,6 +30,13 @@ public abstract class Usuario {
     public String getPassword() {
         return password;
     }
+
+    @Override
+    public boolean equals(Object otroUSuario) {
+        Usuario u = (Usuario)otroUSuario;
+        return this.cedula.equals(u.getCedula());
+    }
+    
     
     
 }

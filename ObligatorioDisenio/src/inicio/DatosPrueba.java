@@ -7,6 +7,7 @@ package inicio;
 import Exceptions.DuplicadoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import logica.CategoriaVehiculo;
 import logica.Fachada;
 import logica.UsuarioAdministrador;
 import logica.UsuarioPropietario;
@@ -28,14 +29,47 @@ public class DatosPrueba {
         UsuarioPropietario propietario2 = fachada.agregarUsuarioPropietario("d", "d", "Propietario2",2000);
         
         try {
+            //CARGA DE CATEGORIAS DE VEHICULOS
+           fachada.agregarCategoriaVehiculo("Auto");
+           fachada.agregarCategoriaVehiculo("Moto");
+           fachada.agregarCategoriaVehiculo("Camion");
+           
+            
             //CARGA DE VEHICULOS
-            Vehiculo v1 = fachada.agregarVehiculo("MAT01", "ROJO", "MOD1");
-            Vehiculo v2 = fachada.agregarVehiculo("MAT02", "ROJO", "MOD1");
-            Vehiculo v3 = fachada.agregarVehiculo("MAT03", "ROJO", "MOD1");
-            Vehiculo v4 = fachada.agregarVehiculo("MAT04", "ROJO", "MOD1");
+            Vehiculo v1 = fachada.agregarVehiculo("MAT01", "ROJO", "MOD1",fachada.obtenerCategoriasVehiculos().get(0));
+            Vehiculo v2 = fachada.agregarVehiculo("MAT02", "ROJO", "MOD1",fachada.obtenerCategoriasVehiculos().get(0));
+            Vehiculo v3 = fachada.agregarVehiculo("MAT03", "ROJO", "MOD1",fachada.obtenerCategoriasVehiculos().get(0));
+            Vehiculo v4 = fachada.agregarVehiculo("MAT04", "ROJO", "MOD1",fachada.obtenerCategoriasVehiculos().get(0));
             
             propietario1.asociarVehiculo(v1);
             propietario2.asociarVehiculo(v2);
+            v1.asignarPropietario(propietario1);
+            v2.asignarPropietario(propietario2);
+            
+            
+            //CARGA DE TARIFAS
+            fachada.agregarTarifa(100,"Tarifa autos", fachada.obtenerCategoriasVehiculos().get(0));
+            fachada.agregarTarifa(300,"Tarifa autos2",fachada.obtenerCategoriasVehiculos().get(0));
+            fachada.agregarTarifa(200,"Tarifa motos", fachada.obtenerCategoriasVehiculos().get(1));
+            fachada.agregarTarifa(300,"Tarifa camiones", fachada.obtenerCategoriasVehiculos().get(2));
+            
+            //CARGA DE PUESTOS
+            fachada.agregarPuesto("Puesto 1", "direccion");
+            fachada.agregarPuesto("Puesto 2", "direccion");
+            fachada.agregarPuesto("Puesto 3", "direccion");
+            
+            //ASIGNACION DE TARIFAS A PUESTOS
+            fachada.obtenerPuestos().get(0).agregarTarifa(fachada.obtenerTarifas().get(0));
+            fachada.obtenerPuestos().get(0).agregarTarifa(fachada.obtenerTarifas().get(2));
+            fachada.obtenerPuestos().get(0).agregarTarifa(fachada.obtenerTarifas().get(3));
+            
+            fachada.obtenerPuestos().get(1).agregarTarifa(fachada.obtenerTarifas().get(1));
+            fachada.obtenerPuestos().get(1).agregarTarifa(fachada.obtenerTarifas().get(2));
+            fachada.obtenerPuestos().get(1).agregarTarifa(fachada.obtenerTarifas().get(3));
+            
+            //AGREGAR TRANSITO PRUEBA
+            fachada.agregarTransito(fachada.obtenerPuestos().get(0), v1, fachada.obtenerTarifas().get(0));
+            
             
         } catch (DuplicadoException ex) {
             Logger.getLogger(DatosPrueba.class.getName()).log(Level.SEVERE, null, ex);
