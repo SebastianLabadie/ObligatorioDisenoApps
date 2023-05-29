@@ -5,6 +5,7 @@
 package logica;
 
 import Exceptions.DuplicadoException;
+import Exceptions.NumeroNegativoException;
 import java.util.ArrayList;
 
 /**
@@ -17,6 +18,7 @@ public class SistemaTransito {
     private ArrayList<Puesto> puestos = new ArrayList<>();
     private ArrayList<Tarifa> tarifas = new ArrayList<>();
     private ArrayList<Transito> transitos = new ArrayList<>();
+    private ArrayList<Recarga> recargas = new ArrayList<>();
     
     
      
@@ -57,6 +59,16 @@ public class SistemaTransito {
         
     }
     
+    public void agregarRecarga(double monto,UsuarioPropietario usr) throws NumeroNegativoException{
+        Validador.positivoDouble(monto);
+        Recarga r = new Recarga(monto);
+        recargas.add(r);
+        usr.agregarRecarga(r);
+        Fachada.getInstancia().avisar(Fachada.eventos.cambioListaRecargas);
+        
+    }
+    
+    
      public ArrayList<Transito> obtenerTransitosDeUsuario(UsuarioPropietario u){
          ArrayList<Transito> ret = new ArrayList<>();
          for (Transito t : transitos) {
@@ -67,7 +79,16 @@ public class SistemaTransito {
          
          return ret;
      }
-    
+     
+     public ArrayList<Recarga> obtenerRecargasDeUsuario(UsuarioPropietario u){
+
+         return u.getRecargas();
+     }
+
+    public ArrayList<Recarga> getRecargas() {
+        return recargas;
+    }
+
     public ArrayList<Vehiculo> getVehiculos() {
         return vehiculos;
     }

@@ -6,6 +6,7 @@ package logica;
 
 import Exceptions.DuplicadoException;
 import Exceptions.LoginException;
+import Exceptions.NumeroNegativoException;
 import java.util.ArrayList;
 import observador.Observable;
 
@@ -15,7 +16,7 @@ import observador.Observable;
  */
 public class Fachada extends Observable{
     
-    public enum eventos{cambioListaConexiones};
+    public enum eventos{cambioListaConexiones,cambioListaRecargas};
     
     private SistemaAcceso sAcceso = new SistemaAcceso();
     private SistemaTransito sTransito = new SistemaTransito();
@@ -78,9 +79,19 @@ public class Fachada extends Observable{
         sTransito.agregarTransito(puesto, vehiculo, tarifa);
     }
     
+    public void agregarRecarga(double monto,UsuarioPropietario usr) throws NumeroNegativoException{
+        sTransito.agregarRecarga(monto,usr);
+        
+    }
+    
     
     public ArrayList<Transito> obtenerTransitosDeUsuario(UsuarioPropietario u){
          return sTransito.obtenerTransitosDeUsuario(u);
+        
+    }
+    
+    public ArrayList<Recarga> obtenerRecargasDeUsuario(UsuarioPropietario u){
+         return sTransito.obtenerRecargasDeUsuario(u);
         
     }
             

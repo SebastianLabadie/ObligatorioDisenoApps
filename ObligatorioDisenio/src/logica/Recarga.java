@@ -1,27 +1,35 @@
 package logica;
 
 import java.time.LocalDateTime;
+import java.util.Date;
+import observador.Observable;
+import observador.Observador;
 
 
-public class Recarga {
+public class Recarga extends Observable{
     public enum EstadoRec{
         PENDIENTE,
         ACEPTADA,
         RECHAZADA//VER SI SIRVE
     }
     
+    public enum eventos{cambioListaRecarga};
+    
     private EstadoRec estado;
-    private LocalDateTime fecha;
+    private Date fecha;
     private double monto;
     private UsuarioAdministrador usr;
 
     public Recarga(double monto) {
-        this.fecha = LocalDateTime.now();
+        this.fecha = new Date();
         this.monto = monto;
         this.estado = EstadoRec.PENDIENTE;
-        this.usr = null;        
+        this.usr = null;
+        avisar(eventos.cambioListaRecarga);
+        Fachada.getInstancia().avisar(Fachada.eventos.cambioListaRecargas);
+        
     }
-
+    
     public EstadoRec getEstado() {
         return estado;
     }
@@ -30,7 +38,7 @@ public class Recarga {
         return monto;
     }
 
-    public LocalDateTime getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 

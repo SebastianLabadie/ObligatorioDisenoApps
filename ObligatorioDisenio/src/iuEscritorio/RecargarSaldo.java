@@ -4,17 +4,25 @@
  */
 package iuEscritorio;
 
+import Exceptions.NumeroNegativoException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import logica.Fachada;
 import logica.Recarga;
 import logica.Recarga.EstadoRec;
 import logica.UsuarioPropietario;
+import observador.Observable;
+import observador.Observador;
 
 /**
  *
  * @author rodri
  */
-public class RecargarSaldo extends javax.swing.JFrame {
- private UsuarioPropietario usuario;
+public class RecargarSaldo extends javax.swing.JFrame implements Observador {
+    private UsuarioPropietario usuario;
+    private Recarga recarga;
     /**
      * Creates new form RecargarSaldo
      */
@@ -40,6 +48,12 @@ public class RecargarSaldo extends javax.swing.JFrame {
         lMonto = new javax.swing.JLabel();
         tMontoARecargar = new javax.swing.JTextField();
         btnRecargar = new javax.swing.JButton();
+
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         lNomUsuario.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         lNomUsuario.setForeground(new java.awt.Color(0, 0, 0));
@@ -112,10 +126,22 @@ public class RecargarSaldo extends javax.swing.JFrame {
         double monto = Double.parseDouble(tMontoARecargar.getText());
         
         Recarga rec = new Recarga(monto);
-        ArrayList<Recarga> recargas = usuario.getRecargas();
-        recargas.add(rec);
+        rec.agregarObservador(this);
+        try {
+            Fachada.getInstancia().agregarRecarga(monto,this.usuario);
+        } catch (NumeroNegativoException ex) {
+            JOptionPane.showMessageDialog(this,"Monto es menor a 1");
+        }
+        
+        this.recarga = rec;
+        
         
     }//GEN-LAST:event_btnRecargarActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        recarga.quitarObservador(this);
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -155,4 +181,9 @@ public class RecargarSaldo extends javax.swing.JFrame {
     private javax.swing.JLabel lSaldoUsuario1;
     private javax.swing.JTextField tMontoARecargar;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actualizar(Object evento, Observable origen) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

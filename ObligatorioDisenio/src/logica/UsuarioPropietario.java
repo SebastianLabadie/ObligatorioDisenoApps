@@ -20,12 +20,17 @@ public class UsuarioPropietario extends Usuario{
         super(cedula, nombreCompleto, password);
         this.saldo = saldo;
         this.vehiculos = new ArrayList<>();
+        this.recargas = new ArrayList<>();
     }
 
     public ArrayList<Vehiculo> getVehiculos() {
         return vehiculos;
     }
 
+    public void agregarRecarga(Recarga rec){
+        recargas.add(rec);
+    }
+    
     public int getSaldo() {
         return saldo;
     }
