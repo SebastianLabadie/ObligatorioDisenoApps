@@ -5,11 +5,7 @@
 package iuEscritorio;
 
 import java.text.SimpleDateFormat;
-<<<<<<< HEAD
-import java.time.LocalDateTime;
-=======
 import java.util.ArrayList;
->>>>>>> 7fff53d07408fb71691b1696817fbd1439a5c4e1
 import javax.swing.table.DefaultTableModel;
 import logica.Fachada;
 import logica.Transito;
@@ -54,16 +50,9 @@ public class TableroDeControl extends javax.swing.JFrame {
         lCantVehiculos = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaVehiculos = new javax.swing.JTable();
-<<<<<<< HEAD
-        lCantVehiculos1 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        SaldoTable = new javax.swing.JTable();
-        btnRecargar = new javax.swing.JButton();
-=======
         lCantTransitos = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaTransitos = new javax.swing.JTable();
->>>>>>> 7fff53d07408fb71691b1696817fbd1439a5c4e1
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,35 +71,10 @@ public class TableroDeControl extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(tablaVehiculos);
 
-<<<<<<< HEAD
-        lCantVehiculos1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
-        lCantVehiculos1.setText("Saldo");
-
-        SaldoTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane3.setViewportView(SaldoTable);
-
-        btnRecargar.setText("Recargar");
-        btnRecargar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRecargarActionPerformed(evt);
-            }
-        });
-=======
         lCantTransitos.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         lCantTransitos.setText("cTr");
 
         jScrollPane2.setViewportView(tablaTransitos);
->>>>>>> 7fff53d07408fb71691b1696817fbd1439a5c4e1
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -127,26 +91,6 @@ public class TableroDeControl extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-<<<<<<< HEAD
-                        .addGap(50, 50, 50)
-                        .addComponent(lCantVehiculos)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 904, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lCantVehiculos1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(btnRecargar)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 838, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(18, 18, 18))
-=======
                         .addContainerGap(25, Short.MAX_VALUE)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 904, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(3, 3, 3))
@@ -162,7 +106,6 @@ public class TableroDeControl extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2)
                 .addContainerGap())
->>>>>>> 7fff53d07408fb71691b1696817fbd1439a5c4e1
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,16 +121,6 @@ public class TableroDeControl extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lCantVehiculos)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-<<<<<<< HEAD
-                .addGap(87, 87, 87)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lCantVehiculos1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnRecargar)))
-                .addContainerGap(297, Short.MAX_VALUE))
-=======
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 197, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -195,16 +128,10 @@ public class TableroDeControl extends javax.swing.JFrame {
                         .addComponent(lCantTransitos))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30))
->>>>>>> 7fff53d07408fb71691b1696817fbd1439a5c4e1
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnRecargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecargarActionPerformed
-        // TODO add your handling code here:
-        new RecargarSaldo(usuario).setVisible(true);
-    }//GEN-LAST:event_btnRecargarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -233,27 +160,6 @@ public class TableroDeControl extends javax.swing.JFrame {
 //            fila++;
 //        }
         tablaVehiculos.setModel(datos);
-        
-        //CARGO TABLA 
-        DefaultTableModel tblsaldo = new DefaultTableModel();
-        tblsaldo.addColumn("Fecha Recarga");
-        tblsaldo.addColumn("Monto");
-        tblsaldo.addColumn("Estado");
-        tblsaldo.addColumn("Administrador");
-        
-        tblsaldo.setRowCount(1);
-        fila = 0;
-//        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
-//        for(Dialogo d:dialogos){
-            tblsaldo.setValueAt(LocalDateTime.now(), fila, 0);
-            tblsaldo.setValueAt("500", fila, 1);
-            tblsaldo.setValueAt("PENDIENTE", fila, 2);
-            tblsaldo.setValueAt("PEPE", fila, 3);
-            
-//      
-//            fila++;
-//        }
-        SaldoTable.setModel(tblsaldo);
     }
     
      private void mostrarTablaTransitos() {
@@ -288,19 +194,12 @@ public class TableroDeControl extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable SaldoTable;
-    private javax.swing.JButton btnRecargar;
     private javax.swing.JScrollPane jScrollPane1;
-<<<<<<< HEAD
-    private javax.swing.JScrollPane jScrollPane3;
-=======
     private javax.swing.JScrollPane jScrollPane2;
->>>>>>> 7fff53d07408fb71691b1696817fbd1439a5c4e1
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel l1;
     private javax.swing.JLabel lCantTransitos;
     private javax.swing.JLabel lCantVehiculos;
-    private javax.swing.JLabel lCantVehiculos1;
     private javax.swing.JLabel lNombreUsuario;
     private javax.swing.JLabel lSaldoUsuario;
     private javax.swing.JTable tablaTransitos;
