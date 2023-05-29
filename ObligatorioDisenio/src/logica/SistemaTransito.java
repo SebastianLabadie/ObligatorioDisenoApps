@@ -13,16 +13,20 @@ import java.util.ArrayList;
  */
 public class SistemaTransito {
     private ArrayList<Vehiculo> vehiculos = new ArrayList<>();
+    private ArrayList<CategoriaVehiculo> categoriasVehiculos = new ArrayList<>();
+    private ArrayList<Puesto> puestos = new ArrayList<>();
+    private ArrayList<Tarifa> tarifas = new ArrayList<>();
+    private ArrayList<Transito> transitos = new ArrayList<>();
     
-    public Vehiculo agregarVehiculo(String matricula, String color, String modelo) throws DuplicadoException{
+    
+     
+    public Vehiculo agregarVehiculo(String matricula, String color, String modelo,CategoriaVehiculo cat) throws DuplicadoException{
         //validar que vehiculo no este creado
         validarVehiculo(matricula);
-        Vehiculo v = new Vehiculo(matricula, color, modelo);
+        Vehiculo v = new Vehiculo(matricula, color, modelo,cat);
         vehiculos.add(v);
         return v;
     }
-    
-    
     
     private void validarVehiculo(String matricula) throws DuplicadoException{
         for (Vehiculo vehiculo : vehiculos) {
@@ -31,5 +35,56 @@ public class SistemaTransito {
             }
         }
     }
+    
+    public void agregarCategoriaVehiculo(String nom){
+        CategoriaVehiculo c = new CategoriaVehiculo(nom);
+        categoriasVehiculos.add(c);
+    }
+    
+    public void agregarTarifa(int monto,String nombre,CategoriaVehiculo cat){
+        Tarifa t = new Tarifa(monto,nombre, cat);
+        tarifas.add(t);
+    }
+    
+    public void agregarPuesto(String nom,String dir){
+        Puesto p = new Puesto(nom, dir);
+        puestos.add(p);
+    }
+
+    public void agregarTransito(Puesto puesto,Vehiculo vehiculo, Tarifa tarifa ){
+        Transito t= new Transito(puesto, vehiculo, tarifa);
+        transitos.add(t);
+        
+    }
+    
+     public ArrayList<Transito> obtenerTransitosDeUsuario(UsuarioPropietario u){
+         ArrayList<Transito> ret = new ArrayList<>();
+         for (Transito t : transitos) {
+             if (t.getVehiculo().getPropietario().equals(u)) {
+                   ret.add(t);
+             }
+         }
+         
+         return ret;
+     }
+    
+    public ArrayList<Vehiculo> getVehiculos() {
+        return vehiculos;
+    }
+
+    public ArrayList<CategoriaVehiculo> getCategoriasVehiculos() {
+        return categoriasVehiculos;
+    }
+
+    public ArrayList<Puesto> getPuestos() {
+        return puestos;
+    }
+
+    public ArrayList<Tarifa> getTarifas() {
+        return tarifas;
+    }
+    
+    
+    
     
 }

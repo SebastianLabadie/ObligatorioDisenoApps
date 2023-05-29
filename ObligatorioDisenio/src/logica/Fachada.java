@@ -46,9 +46,45 @@ public class Fachada extends Observable{
         return sAcceso.loginAdministrador(cedula, pwd);
     }
     
-    public Vehiculo agregarVehiculo(String matricula, String color, String modelo) throws DuplicadoException{
-       return  sTransito.agregarVehiculo(matricula, color, modelo);
+    public Vehiculo agregarVehiculo(String matricula, String color, String modelo,CategoriaVehiculo cat) throws DuplicadoException{
+       return  sTransito.agregarVehiculo(matricula, color, modelo,cat);
     }
+    
+    public void agregarCategoriaVehiculo(String nom){
+        sTransito.agregarCategoriaVehiculo(nom);
+    }
+    
+    public ArrayList<CategoriaVehiculo> obtenerCategoriasVehiculos(){
+        return sTransito.getCategoriasVehiculos();
+    } 
+    
+    public ArrayList<Tarifa> obtenerTarifas(){
+        return sTransito.getTarifas();
+    }
+    
+    public ArrayList<Puesto> obtenerPuestos(){
+        return sTransito.getPuestos();
+    }
+    
+    public void agregarTarifa(int monto,String nom,CategoriaVehiculo cat){
+        sTransito.agregarTarifa(monto,nom, cat);
+    }
+    
+    public void agregarPuesto(String nom,String dir){
+        sTransito.agregarPuesto(nom, dir);
+    }
+    
+    public void agregarTransito(Puesto puesto,Vehiculo vehiculo, Tarifa tarifa){
+        sTransito.agregarTransito(puesto, vehiculo, tarifa);
+    }
+    
+    
+    public ArrayList<Transito> obtenerTransitosDeUsuario(UsuarioPropietario u){
+         return sTransito.obtenerTransitosDeUsuario(u);
+        
+    }
+            
+    
 
     public ArrayList<Conexion> getConexiones() {
         return sAcceso.getConexiones();
