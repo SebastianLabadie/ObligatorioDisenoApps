@@ -4,9 +4,12 @@
  */
 package iuEscritorio;
 
+import controlador.ControladorTableroDeControl;
+import controlador.VistaTableroDeControl;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import logica.BonificacionAsignada;
 import logica.Fachada;
 import logica.Transito;
 import logica.UsuarioPropietario;
@@ -14,33 +17,25 @@ import logica.Recarga;
 import observador.Observable;
 import observador.Observador;
 import logica.Recarga.EstadoRec;
+import logica.Vehiculo;
 
 /**
  *
  * @author sebastianlb
  */
-public class TableroDeControl extends javax.swing.JFrame implements Observador {
+public class TableroDeControl extends javax.swing.JFrame implements VistaTableroDeControl{
 
     private UsuarioPropietario usuario;
-    private Recarga recarga;
-    private ArrayList<Transito> transitos;
-    private ArrayList<Recarga> recargas;
     /**
      * Creates new form TableroDeControl
      */
+    private ControladorTableroDeControl controlador;
+    
     public TableroDeControl(UsuarioPropietario u) {
         initComponents();
         this.usuario = u;
-        this.transitos = Fachada.getInstancia().obtenerTransitosDeUsuario(u);
-        this.recargas = Fachada.getInstancia().obtenerRecargasDeUsuario(u);
-        lNombreUsuario.setText(u.getNombreCompleto());
-        lSaldoUsuario.setText(""+u.getSaldo());
-        lCantVehiculos.setText(""+u.getVehiculos().size());
-        lCantTransitos.setText(""+transitos.size());
-        mostrarTabla();
-        mostrarTablaTransitos();
-        mostrarTablaRecargas();
-        Fachada.getInstancia().agregarObservador(this);
+        this.controlador = new ControladorTableroDeControl(usuario, this);
+       
     }   
 
     /**
@@ -62,10 +57,13 @@ public class TableroDeControl extends javax.swing.JFrame implements Observador {
         lCantTransitos = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaTransitos = new javax.swing.JTable();
-        lRecargas = new javax.swing.JLabel();
+        lCantRecargas = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblRecargas = new javax.swing.JTable();
         btnRecargar = new javax.swing.JButton();
+        lCantBonificaciones = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tablaBonificaciones = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -89,8 +87,8 @@ public class TableroDeControl extends javax.swing.JFrame implements Observador {
 
         jScrollPane2.setViewportView(tablaTransitos);
 
-        lRecargas.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
-        lRecargas.setText("Recargas");
+        lCantRecargas.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        lCantRecargas.setText("cRe");
 
         jScrollPane3.setViewportView(tblRecargas);
 
@@ -100,6 +98,11 @@ public class TableroDeControl extends javax.swing.JFrame implements Observador {
                 btnRecargarActionPerformed(evt);
             }
         });
+
+        lCantBonificaciones.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        lCantBonificaciones.setText("cBo");
+
+        jScrollPane4.setViewportView(tablaBonificaciones);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -114,32 +117,35 @@ public class TableroDeControl extends javax.swing.JFrame implements Observador {
                 .addComponent(lNombreUsuario)
                 .addGap(26, 26, 26))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 904, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(56, 56, 56))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(50, 50, 50)
-                                    .addComponent(lCantVehiculos))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(lCantTransitos)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(32, 32, 32)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lRecargas)
-                                    .addComponent(btnRecargar))))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3)
-                            .addComponent(jScrollPane2)
-                            .addComponent(jScrollPane1))))
-                .addContainerGap())
+                            .addComponent(lCantRecargas)
+                            .addComponent(btnRecargar)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(90, 90, 90)
+                        .addComponent(lCantTransitos))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(84, 84, 84)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lCantVehiculos)
+                            .addComponent(lCantBonificaciones))))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 909, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 909, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 909, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 909, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 904, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(101, 101, 101))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jScrollPane1, jScrollPane2, jScrollPane3, jScrollPane4});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -154,25 +160,26 @@ public class TableroDeControl extends javax.swing.JFrame implements Observador {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lCantVehiculos)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(51, 51, 51)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(lCantTransitos)))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lCantBonificaciones))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 184, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lCantTransitos))
+                .addGap(47, 47, 47)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(lRecargas)
+                        .addGap(10, 10, 10)
+                        .addComponent(lCantRecargas)
                         .addGap(43, 43, 43)
-                        .addComponent(btnRecargar)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(btnRecargar)))
+                .addGap(44, 44, 44))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jScrollPane1, jScrollPane2, jScrollPane3, jScrollPane4});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -188,18 +195,42 @@ public class TableroDeControl extends javax.swing.JFrame implements Observador {
     
     
    
+
+
+    
+    
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnRecargar;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel l1;
+    private javax.swing.JLabel lCantBonificaciones;
+    private javax.swing.JLabel lCantRecargas;
+    private javax.swing.JLabel lCantTransitos;
+    private javax.swing.JLabel lCantVehiculos;
+    private javax.swing.JLabel lNombreUsuario;
+    private javax.swing.JLabel lSaldoUsuario;
+    private javax.swing.JTable tablaBonificaciones;
+    private javax.swing.JTable tablaTransitos;
+    private javax.swing.JTable tablaVehiculos;
+    private javax.swing.JTable tblRecargas;
+    // End of variables declaration//GEN-END:variables
+
     @Override
-    public void actualizar(Object evento, Observable origen) {
-        System.out.println("LLEGO");
-        if(evento.equals(Fachada.eventos.cambioListaRecargas)){
-            this.recargas = Fachada.getInstancia().obtenerRecargasDeUsuario(this.usuario);
-            System.out.println(this.recargas);
-            mostrarTablaRecargas();
-        }
-        
+    public void remplazarLabels(UsuarioPropietario u, ArrayList<Transito> t, ArrayList<BonificacionAsignada> b,ArrayList<Recarga> r) {
+        lNombreUsuario.setText(u.getNombreCompleto());
+        lSaldoUsuario.setText(""+u.getSaldo());
+        lCantVehiculos.setText(""+u.getVehiculos().size());
+        lCantTransitos.setText(""+t.size());
+        lCantBonificaciones.setText(""+b.size());
+        lCantRecargas.setText(""+r.size());
     }
 
-    private void mostrarTabla() {
+    @Override
+    public void mostrarVehiculos(ArrayList<Vehiculo> vehiculos) {
         DefaultTableModel datos = new DefaultTableModel();
         datos.addColumn("Matricula");
         datos.addColumn("Modelo");
@@ -207,23 +238,23 @@ public class TableroDeControl extends javax.swing.JFrame implements Observador {
         datos.addColumn("#Transitos");
         datos.addColumn("Monto Total");
      
-        datos.setRowCount(1);
+        datos.setRowCount(vehiculos.size());
         int fila = 0;
-//        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
-//        for(Dialogo d:dialogos){
-datos.setValueAt("mat1", fila, 0);
-datos.setValueAt("mod1", fila, 1);
-datos.setValueAt("rojo", fila, 2);
-datos.setValueAt("1", fila, 3);
-datos.setValueAt("1222", fila, 4);
-//      
-//            fila++;
-//        }
-tablaVehiculos.setModel(datos);
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+        for(Vehiculo v:usuario.getVehiculos()){
+            datos.setValueAt(v.getMatricula(), fila, 0);
+            datos.setValueAt(v.getModelo(), fila, 1);
+            datos.setValueAt(v.getColor(), fila, 2);
+            datos.setValueAt("1", fila, 3);
+            datos.setValueAt("400", fila, 4);
+            fila++;
+        }
+        tablaVehiculos.setModel(datos);
     }
-    
-     private void mostrarTablaTransitos() {
-        DefaultTableModel datos = new DefaultTableModel();
+
+    @Override
+    public void mostrarTransitos(ArrayList<Transito> transitos) {
+      DefaultTableModel datos = new DefaultTableModel();
         datos.addColumn("Puesto");
         datos.addColumn("Matricula");
         datos.addColumn("Tarifa");
@@ -241,10 +272,9 @@ tablaVehiculos.setModel(datos);
             datos.setValueAt(t.getVehiculo().getMatricula(), fila, 1);
             datos.setValueAt(t.getTarifa().getNombre(), fila, 2);
             datos.setValueAt(t.getTarifa().getMonto(), fila, 3);
-            datos.setValueAt("bonif", fila, 4);
-            datos.setValueAt("bonif", fila, 5);
+            datos.setValueAt(t.getBonificacion() != null ? t.getBonificacion().getBonificacion().getNombre() : "", fila, 4);
+            datos.setValueAt(t.getBonificacion() != null ? t.getBonificacion().getBonificacion().getDescuento(): "", fila, 5);
             datos.setValueAt(t.getMontoPagado(), fila, 6);
-            datos.setValueAt(t.getMontoPagado(), fila, 7);
             datos.setValueAt(sdf.format(t.getFechaIngreso()), fila, 7);
             
       
@@ -252,48 +282,47 @@ tablaVehiculos.setModel(datos);
        }
         tablaTransitos.setModel(datos);
     }
-     
-     private void mostrarTablaRecargas() {
-        if (recargas !=null ){
-        
-            DefaultTableModel datos = new DefaultTableModel();
-            datos.addColumn("Fecha Recarga");
-            datos.addColumn("Monto");
-            datos.addColumn("Estado");
-            datos.addColumn("Administrador");
+
+    @Override
+    public void mostrarRecargas(ArrayList<Recarga> recargas) {
+        DefaultTableModel datos = new DefaultTableModel();
+        datos.addColumn("Fecha Recarga");
+        datos.addColumn("Monto");
+        datos.addColumn("Estado");
+        datos.addColumn("Administrador");
 
 
-            datos.setRowCount(recargas.size());
-            int fila = 0;
-            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
-            for(Recarga r:recargas){
-                datos.setValueAt(sdf.format(r.getFecha()), fila, 0);
-                datos.setValueAt(r.getMonto(), fila, 1);
-                datos.setValueAt(r.getEstado(), fila, 2);
-                datos.setValueAt(r.getUsr(), fila, 3);
-                fila++;
-           }
-            tblRecargas.setModel(datos);
-        }
-        
+        datos.setRowCount(recargas.size());
+        int fila = 0;
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+        for(Recarga r:recargas){
+            datos.setValueAt(sdf.format(r.getFecha()), fila, 0);
+            datos.setValueAt(r.getMonto(), fila, 1);
+            datos.setValueAt(r.getEstado(), fila, 2);
+            datos.setValueAt(r.getUsr(), fila, 3);
+            fila++;
+       }
+        tblRecargas.setModel(datos);
     }
-     
-     
-    
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnRecargar;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel l1;
-    private javax.swing.JLabel lCantTransitos;
-    private javax.swing.JLabel lCantVehiculos;
-    private javax.swing.JLabel lNombreUsuario;
-    private javax.swing.JLabel lRecargas;
-    private javax.swing.JLabel lSaldoUsuario;
-    private javax.swing.JTable tablaTransitos;
-    private javax.swing.JTable tablaVehiculos;
-    private javax.swing.JTable tblRecargas;
-    // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void mostrarBonificacionesAsignadas(ArrayList<BonificacionAsignada> bonificaciones) {
+        DefaultTableModel datos = new DefaultTableModel();
+        datos.addColumn("Bonif Nombre");
+        datos.addColumn("Puesto");
+        datos.addColumn("Fecha Asignada");
+        
+        datos.setRowCount(bonificaciones.size());
+        int fila = 0;
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+        for(BonificacionAsignada b:bonificaciones){
+            datos.setValueAt(b.getBonificacion().getNombre(), fila, 0);
+            datos.setValueAt(b.getPuesto().getNombre(), fila, 1);
+            datos.setValueAt(sdf.format(b.getFechaAsignada()), fila, 2);
+            
+      
+            fila++;
+       }
+        tablaBonificaciones.setModel(datos);
+    }
 }

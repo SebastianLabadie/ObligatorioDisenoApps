@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class UsuarioPropietario extends Usuario{
     private ArrayList<Vehiculo> vehiculos;
     private ArrayList<Recarga> recargas;
+    private ArrayList<BonificacionAsignada> bonificaciones;
     private int saldo;
     
 
@@ -21,6 +22,7 @@ public class UsuarioPropietario extends Usuario{
         this.saldo = saldo;
         this.vehiculos = new ArrayList<>();
         this.recargas = new ArrayList<>();
+        this.bonificaciones = new ArrayList<>();
     }
 
     public ArrayList<Vehiculo> getVehiculos() {
@@ -41,6 +43,14 @@ public class UsuarioPropietario extends Usuario{
     
     public void asociarVehiculo(Vehiculo v){
         vehiculos.add(v);
+    }
+    
+    public void agregarBonificacion(BonificacionAsignada b){
+        bonificaciones.add(b);
+    }
+    
+    public ArrayList<BonificacionAsignada> obtenerBonificaciones(){
+        return bonificaciones;
     }
 
     

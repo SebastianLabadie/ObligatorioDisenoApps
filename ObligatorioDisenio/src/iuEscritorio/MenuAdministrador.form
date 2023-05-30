@@ -18,6 +18,10 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Emular Transito"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="itemEmularTransitoMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemEmularTransitoActionPerformed"/>
+          </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="itemAprobarRecarga">
           <Properties>

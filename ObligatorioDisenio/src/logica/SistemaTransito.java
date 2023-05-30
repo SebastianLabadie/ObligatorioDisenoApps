@@ -1,10 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package logica;
 
 import Exceptions.DuplicadoException;
+import Exceptions.NoExiste;
 import Exceptions.NumeroNegativoException;
 import java.util.ArrayList;
 
@@ -53,8 +51,8 @@ public class SistemaTransito {
         puestos.add(p);
     }
 
-    public void agregarTransito(Puesto puesto,Vehiculo vehiculo, Tarifa tarifa ){
-        Transito t= new Transito(puesto, vehiculo, tarifa);
+    public void agregarTransito(Puesto puesto,Vehiculo vehiculo, Tarifa tarifa,BonificacionAsignada bonificacion ){
+        Transito t= new Transito(puesto, vehiculo, tarifa,bonificacion);
         transitos.add(t);
         
     }
@@ -81,8 +79,15 @@ public class SistemaTransito {
      }
      
      public ArrayList<Recarga> obtenerRecargasDeUsuario(UsuarioPropietario u){
-
          return u.getRecargas();
+     }
+     
+     public Vehiculo getVehiculoByMatricula(String matricula) throws NoExiste{
+         for (Vehiculo vehiculo : vehiculos) {
+             if(vehiculo.getMatricula().equals(matricula)) return vehiculo;
+         }
+         
+         throw new NoExiste("No existe el vehículo");
      }
 
     public ArrayList<Recarga> getRecargas() {

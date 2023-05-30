@@ -16,14 +16,21 @@ public class Transito {
     private Vehiculo vehiculo;
     private Tarifa tarifa;
     private int montoPagado;
+    private BonificacionAsignada bonificacion;
 
-    public Transito( Puesto puesto, Vehiculo vehiculo, Tarifa tarifa) {
+    public Transito( Puesto puesto, Vehiculo vehiculo, Tarifa tarifa,BonificacionAsignada bonificacion) {
         this.fechaIngreso = new Date();
         this.puesto = puesto;
         this.vehiculo = vehiculo;
         this.tarifa = tarifa;
         this.montoPagado =0;
+        this.bonificacion = bonificacion;
     }
+
+    public BonificacionAsignada getBonificacion() {
+        return bonificacion;
+    }
+    
     
     public Date getFechaIngreso() {
         return fechaIngreso;

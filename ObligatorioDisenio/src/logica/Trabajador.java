@@ -8,17 +8,15 @@ package logica;
  *
  * @author sebastianlb
  */
-public class Exonerado extends Bonificacion {
-    
-    public Exonerado(String nombre) {
+public class Trabajador extends Bonificacion{
+
+    public Trabajador(String nombre) {
         super(nombre);
     }
 
     @Override
     public int getDescuento() {
-       return 100;
+        return 80;
     }
-    
-    
     
 }

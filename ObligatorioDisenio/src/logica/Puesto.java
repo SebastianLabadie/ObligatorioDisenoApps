@@ -40,6 +40,20 @@ public class Puesto {
             tarifas.add(t);
         }
     }
+
+    @Override
+    public String toString() {
+        return nombre;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        Puesto otroPuesto = (Puesto)obj;
+        
+        return this.nombre.equals(otroPuesto.getNombre());
+    }
+    
+    
     
     
     

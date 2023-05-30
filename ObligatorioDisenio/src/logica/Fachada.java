@@ -1,11 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package logica;
 
 import Exceptions.DuplicadoException;
 import Exceptions.LoginException;
+import Exceptions.NoExiste;
 import Exceptions.NumeroNegativoException;
 import java.util.ArrayList;
 import observador.Observable;
@@ -20,6 +17,7 @@ public class Fachada extends Observable{
     
     private SistemaAcceso sAcceso = new SistemaAcceso();
     private SistemaTransito sTransito = new SistemaTransito();
+    private SistemaBonificaciones  sBonificacion= new SistemaBonificaciones();
     
     private static Fachada instancia = new Fachada();
 
@@ -75,8 +73,8 @@ public class Fachada extends Observable{
         sTransito.agregarPuesto(nom, dir);
     }
     
-    public void agregarTransito(Puesto puesto,Vehiculo vehiculo, Tarifa tarifa){
-        sTransito.agregarTransito(puesto, vehiculo, tarifa);
+    public void agregarTransito(Puesto puesto,Vehiculo vehiculo, Tarifa tarifa,BonificacionAsignada bonificacion){
+        sTransito.agregarTransito(puesto, vehiculo, tarifa,bonificacion);
     }
     
     public void agregarRecarga(double monto,UsuarioPropietario usr) throws NumeroNegativoException{
@@ -92,9 +90,23 @@ public class Fachada extends Observable{
     
     public ArrayList<Recarga> obtenerRecargasDeUsuario(UsuarioPropietario u){
          return sTransito.obtenerRecargasDeUsuario(u);
-        
     }
             
+    public void agregarBonificacion(String nombre){
+        sBonificacion.agregarBonificacion(nombre);
+    }
+    
+    public ArrayList<Bonificacion> obtenerBonificaciones(){
+        return sBonificacion.obtenerBonificaciones();
+    }
+    
+    public void crearBonificacionAsignada(Puesto p,Bonificacion b, UsuarioPropietario u){
+        sBonificacion.crearBonificacionAsignada(p, b, u);
+    }
+    
+    public Vehiculo obtenerVehiculoByMatricula(String matricula) throws NoExiste{
+        return sTransito.getVehiculoByMatricula(matricula);
+    }
     
 
     public ArrayList<Conexion> getConexiones() {

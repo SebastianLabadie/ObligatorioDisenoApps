@@ -38,13 +38,15 @@ public class DatosPrueba {
             //CARGA DE VEHICULOS
             Vehiculo v1 = fachada.agregarVehiculo("MAT01", "ROJO", "MOD1",fachada.obtenerCategoriasVehiculos().get(0));
             Vehiculo v2 = fachada.agregarVehiculo("MAT02", "ROJO", "MOD1",fachada.obtenerCategoriasVehiculos().get(0));
-            Vehiculo v3 = fachada.agregarVehiculo("MAT03", "ROJO", "MOD1",fachada.obtenerCategoriasVehiculos().get(0));
+            Vehiculo v3 = fachada.agregarVehiculo("MAT03", "ROJO", "MOD1",fachada.obtenerCategoriasVehiculos().get(1));
             Vehiculo v4 = fachada.agregarVehiculo("MAT04", "ROJO", "MOD1",fachada.obtenerCategoriasVehiculos().get(0));
             
             propietario1.asociarVehiculo(v1);
             propietario2.asociarVehiculo(v2);
+            propietario2.asociarVehiculo(v3);
             v1.asignarPropietario(propietario1);
             v2.asignarPropietario(propietario2);
+            v3.asignarPropietario(propietario2);
             
             
             //CARGA DE TARIFAS
@@ -67,11 +69,26 @@ public class DatosPrueba {
             fachada.obtenerPuestos().get(1).agregarTarifa(fachada.obtenerTarifas().get(2));
             fachada.obtenerPuestos().get(1).agregarTarifa(fachada.obtenerTarifas().get(3));
             
+          
+            
+            //CARGA DE BONIFICACIONES
+            fachada.agregarBonificacion("Exonerado 1");
+            fachada.agregarBonificacion("Exonerado 2");
+            fachada.agregarBonificacion("Trabajador 1");
+            fachada.agregarBonificacion("Trabajador 2");
+            fachada.agregarBonificacion("Frecuente 1");
+            fachada.agregarBonificacion("Frecuente 2");
+            
+            
+            //ASIGNAR BONIFICACIONES
+            fachada.crearBonificacionAsignada(fachada.obtenerPuestos().get(0), fachada.obtenerBonificaciones().get(0), propietario1);
+            
+            
             //AGREGAR TRANSITO PRUEBA
-            fachada.agregarTransito(fachada.obtenerPuestos().get(0), v1, fachada.obtenerTarifas().get(0));
+            fachada.agregarTransito(fachada.obtenerPuestos().get(0), v1, fachada.obtenerTarifas().get(0),propietario1.obtenerBonificaciones().get(0));
             
-            
-        } catch (DuplicadoException ex) {
+        }
+        catch (DuplicadoException ex) {
             Logger.getLogger(DatosPrueba.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

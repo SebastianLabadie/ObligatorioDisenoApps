@@ -53,6 +53,16 @@ public class MenuAdministrador extends javax.swing.JFrame {
         });
 
         itemEmularTransito.setText("Emular Transito");
+        itemEmularTransito.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                itemEmularTransitoMouseClicked(evt);
+            }
+        });
+        itemEmularTransito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemEmularTransitoActionPerformed(evt);
+            }
+        });
         jMenuBar1.add(itemEmularTransito);
 
         itemAprobarRecarga.setText("Aprobar Recarga");
@@ -109,6 +119,16 @@ public class MenuAdministrador extends javax.swing.JFrame {
         // TODO add your handling code here:
        salir();
     }//GEN-LAST:event_itemSalirMouseClicked
+
+    private void itemEmularTransitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemEmularTransitoActionPerformed
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_itemEmularTransitoActionPerformed
+
+    private void itemEmularTransitoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_itemEmularTransitoMouseClicked
+        // TODO add your handling code here:
+        new EmularTransito(this,false).setVisible(true);
+    }//GEN-LAST:event_itemEmularTransitoMouseClicked
 
     /**
      * @param args the command line arguments
