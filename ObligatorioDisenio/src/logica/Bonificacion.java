@@ -19,7 +19,7 @@ public abstract class Bonificacion {
         return nombre;
     }
     
-    public abstract int getDescuento();
+    public abstract int getDescuento(int cantidadTransitos);
     
     
 }

@@ -15,8 +15,10 @@ public class Frecuente extends Bonificacion{
     }
 
     @Override
-    public int getDescuento() {
-        return 50;
+    public int getDescuento(int cantidadTransitos) {
+        if(cantidadTransitos>1) return 50;
+        
+        return 0;
     }
     
 }

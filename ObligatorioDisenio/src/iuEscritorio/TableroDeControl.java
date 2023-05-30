@@ -233,6 +233,7 @@ public class TableroDeControl extends javax.swing.JFrame implements VistaTablero
     public void mostrarVehiculos(ArrayList<Vehiculo> vehiculos) {
         DefaultTableModel datos = new DefaultTableModel();
         datos.addColumn("Matricula");
+        datos.addColumn("Categoria");
         datos.addColumn("Modelo");
         datos.addColumn("Color");
         datos.addColumn("#Transitos");
@@ -243,10 +244,11 @@ public class TableroDeControl extends javax.swing.JFrame implements VistaTablero
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
         for(Vehiculo v:usuario.getVehiculos()){
             datos.setValueAt(v.getMatricula(), fila, 0);
-            datos.setValueAt(v.getModelo(), fila, 1);
-            datos.setValueAt(v.getColor(), fila, 2);
-            datos.setValueAt("1", fila, 3);
-            datos.setValueAt("400", fila, 4);
+            datos.setValueAt(v.getCategoria().getNombre(), fila, 1);
+            datos.setValueAt(v.getModelo(), fila, 2);
+            datos.setValueAt(v.getColor(), fila, 3);
+            datos.setValueAt("1", fila, 4);
+            datos.setValueAt("400", fila, 5);
             fila++;
         }
         tablaVehiculos.setModel(datos);
@@ -273,7 +275,7 @@ public class TableroDeControl extends javax.swing.JFrame implements VistaTablero
             datos.setValueAt(t.getTarifa().getNombre(), fila, 2);
             datos.setValueAt(t.getTarifa().getMonto(), fila, 3);
             datos.setValueAt(t.getBonificacion() != null ? t.getBonificacion().getBonificacion().getNombre() : "", fila, 4);
-            datos.setValueAt(t.getBonificacion() != null ? t.getBonificacion().getBonificacion().getDescuento(): "", fila, 5);
+            datos.setValueAt("", fila, 5);
             datos.setValueAt(t.getMontoPagado(), fila, 6);
             datos.setValueAt(sdf.format(t.getFechaIngreso()), fila, 7);
             

@@ -74,6 +74,13 @@ public class ControladorTableroDeControl implements Observador {
             mostrarRecargas();
         }
         
+        if(evento.equals(Fachada.eventos.cambioListaTransitos)){
+            this.transitos = Fachada.getInstancia().obtenerTransitosDeUsuario(usuario);
+            
+            remplazarLabels();
+            mostrarTransitos();
+        }
+        
     }
     
 }

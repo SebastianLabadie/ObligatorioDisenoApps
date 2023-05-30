@@ -4,6 +4,7 @@ import Exceptions.DuplicadoException;
 import Exceptions.LoginException;
 import Exceptions.NoExiste;
 import Exceptions.NumeroNegativoException;
+import Exceptions.TransitoException;
 import java.util.ArrayList;
 import observador.Observable;
 
@@ -13,11 +14,12 @@ import observador.Observable;
  */
 public class Fachada extends Observable{
     
-    public enum eventos{cambioListaConexiones,cambioListaRecargas};
+    public enum eventos{cambioListaConexiones,cambioListaRecargas,cambioListaTransitos,pepe};
     
     private SistemaAcceso sAcceso = new SistemaAcceso();
     private SistemaTransito sTransito = new SistemaTransito();
     private SistemaBonificaciones  sBonificacion= new SistemaBonificaciones();
+    public static int saldoMinimo=200;
     
     private static Fachada instancia = new Fachada();
 
@@ -73,7 +75,7 @@ public class Fachada extends Observable{
         sTransito.agregarPuesto(nom, dir);
     }
     
-    public void agregarTransito(Puesto puesto,Vehiculo vehiculo, Tarifa tarifa,BonificacionAsignada bonificacion){
+    public void agregarTransito(Puesto puesto,Vehiculo vehiculo, Tarifa tarifa,BonificacionAsignada bonificacion) throws TransitoException{
         sTransito.agregarTransito(puesto, vehiculo, tarifa,bonificacion);
     }
     

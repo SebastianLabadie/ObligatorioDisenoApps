@@ -5,6 +5,7 @@
 package inicio;
 
 import Exceptions.DuplicadoException;
+import Exceptions.TransitoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import logica.CategoriaVehiculo;
@@ -25,8 +26,8 @@ public class DatosPrueba {
         UsuarioAdministrador admin1 = fachada.agregarUsuarioAdministrador("a", "a", "Admin1");
         UsuarioAdministrador admin2 =  fachada.agregarUsuarioAdministrador("b", "b", "Admin2");
             
-        UsuarioPropietario propietario1 = fachada.agregarUsuarioPropietario("c", "c", "Propietario1",100);
-        UsuarioPropietario propietario2 = fachada.agregarUsuarioPropietario("d", "d", "Propietario2",2000);
+        UsuarioPropietario propietario1 = fachada.agregarUsuarioPropietario("c", "c", "Propietario1",400);
+        UsuarioPropietario propietario2 = fachada.agregarUsuarioPropietario("d", "d", "Propietario2",50);
         
         try {
             //CARGA DE CATEGORIAS DE VEHICULOS
@@ -89,6 +90,8 @@ public class DatosPrueba {
             
         }
         catch (DuplicadoException ex) {
+            Logger.getLogger(DatosPrueba.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (TransitoException ex) {
             Logger.getLogger(DatosPrueba.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

@@ -53,6 +53,8 @@ public class UsuarioPropietario extends Usuario{
         return bonificaciones;
     }
 
-    
-    
+    public void setSaldo(int saldo) {
+        this.saldo = saldo;
+    }
+
 }

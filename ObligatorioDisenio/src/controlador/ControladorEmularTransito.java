@@ -5,7 +5,10 @@
 package controlador;
 
 import Exceptions.NoExiste;
+import Exceptions.TransitoException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import logica.BonificacionAsignada;
 import logica.Fachada;
@@ -13,12 +16,14 @@ import logica.Puesto;
 import logica.Tarifa;
 import logica.UsuarioPropietario;
 import logica.Vehiculo;
+import observador.Observable;
+import observador.Observador;
 
 /**
  *
  * @author sebastianlb
  */
-public class ControladorEmularTransito {
+public class ControladorEmularTransito{
     private VistaEmularTransito vista;
     
     public ControladorEmularTransito(VistaEmularTransito vista){
@@ -58,13 +63,19 @@ public class ControladorEmularTransito {
              for (BonificacionAsignada b : u.obtenerBonificaciones()) {
                  if (b.getPuesto().equals(p))  bonificacion=b;
             }
+             
+            
 
 
             Fachada.getInstancia().agregarTransito(p, v, tarifa, bonificacion);
             vista.exito("Transito agregado con exito");
         } catch (NoExiste ex) {
             vista.error(ex.getMessage());
+        } catch (TransitoException ex) {
+            vista.error(ex.getMessage());
         }
     }
+
+    
     
 }

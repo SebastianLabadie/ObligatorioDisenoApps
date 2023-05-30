@@ -4,7 +4,10 @@ package logica;
 import Exceptions.DuplicadoException;
 import Exceptions.NoExiste;
 import Exceptions.NumeroNegativoException;
+import Exceptions.TransitoException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  *
@@ -51,11 +54,29 @@ public class SistemaTransito {
         puestos.add(p);
     }
 
-    public void agregarTransito(Puesto puesto,Vehiculo vehiculo, Tarifa tarifa,BonificacionAsignada bonificacion ){
+    public void agregarTransito(Puesto puesto,Vehiculo vehiculo, Tarifa tarifa,BonificacionAsignada bonificacion ) throws TransitoException{
+        
+        //Validar que usuario tenga saldo suficiente
+            //Hacer funcion para calcular monto si hay una bonificacion asignada
+            //bonificacion.getBonificacion().getNombre().contains(s)
+        int costoTotal = 0;
+        if (bonificacion!=null) {
+            costoTotal = tarifa.getMonto()  - bonificacion.getBonificacion().getDescuento(1);
+        }else{
+            costoTotal = tarifa.getMonto();
+        }
+            
+        UsuarioPropietario propietario = vehiculo.getPropietario();
+        if (propietario.getSaldo() < costoTotal) {
+            throw new TransitoException("Saldo insuficiente: "+propietario.getSaldo());
+        }
+        
         Transito t= new Transito(puesto, vehiculo, tarifa,bonificacion);
         transitos.add(t);
-        
+        propietario.setSaldo(propietario.getSaldo()-costoTotal);
+        Fachada.getInstancia().avisar(Fachada.eventos.cambioListaTransitos);
     }
+    
     
     public void agregarRecarga(double monto,UsuarioPropietario usr) throws NumeroNegativoException{
         Validador.positivoDouble(monto);

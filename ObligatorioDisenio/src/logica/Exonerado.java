@@ -15,7 +15,7 @@ public class Exonerado extends Bonificacion {
     }
 
     @Override
-    public int getDescuento() {
+    public int getDescuento(int cantidadTransitos) {
        return 100;
     }
     

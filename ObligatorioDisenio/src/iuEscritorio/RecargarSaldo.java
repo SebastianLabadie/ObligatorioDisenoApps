@@ -140,7 +140,7 @@ public class RecargarSaldo extends javax.swing.JFrame implements Observador {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
-        recarga.quitarObservador(this);
+        //recarga.quitarObservador(this);
     }//GEN-LAST:event_formWindowClosing
 
     /**
