@@ -14,10 +14,10 @@ public class UsuarioPropietario extends Usuario{
     private ArrayList<Vehiculo> vehiculos;
     private ArrayList<Recarga> recargas;
     private ArrayList<BonificacionAsignada> bonificacionesAsignadas;
-    private int saldo;
+    private double saldo;
     
 
-    public UsuarioPropietario(String cedula, String nombreCompleto, String password,int saldo) {
+    public UsuarioPropietario(String cedula, String nombreCompleto, String password,double saldo) {
         super(cedula, nombreCompleto, password);
         this.saldo = saldo;
         this.vehiculos = new ArrayList<>();
@@ -33,7 +33,7 @@ public class UsuarioPropietario extends Usuario{
         recargas.add(rec);
     }
     
-    public int getSaldo() {
+    public double getSaldo() {
         return saldo;
     }
 
@@ -61,8 +61,17 @@ public class UsuarioPropietario extends Usuario{
         return false;
     }
 
-    public void setSaldo(int saldo) {
+    public void setSaldo(double saldo) {
         this.saldo = saldo;
+    }
+    
+    public void AceptarRecarga(Recarga recarga,UsuarioAdministrador admin){
+        for(Recarga r:recargas){
+            if(r.equals(recarga))
+                r.setEstado(Recarga.EstadoRec.ACEPTADA); 
+                setSaldo(this.saldo+r.getMonto());
+                r.setAdmin(admin);
+        }
     }
 
 }

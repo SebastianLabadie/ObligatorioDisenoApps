@@ -20,7 +20,7 @@ import logica.UsuarioPropietario;
  * @author sebastianlb
  */
 public class ControladorAsignarBonificacion {
-   public VistaAsignarBonificacion vista;
+   private VistaAsignarBonificacion vista;
    private Fachada fachada;
 
     public ControladorAsignarBonificacion(VistaAsignarBonificacion vista) {

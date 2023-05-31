@@ -21,6 +21,7 @@ public class Fachada extends Observable{
     private SistemaAcceso sAcceso = new SistemaAcceso();
     private SistemaTransito sTransito = new SistemaTransito();
     private SistemaBonificaciones  sBonificacion= new SistemaBonificaciones();
+    private SistemaRecarga sRecarga= new SistemaRecarga();
     public static int saldoMinimo=200;
     
     private static Fachada instancia = new Fachada();
@@ -33,7 +34,7 @@ public class Fachada extends Observable{
     private Fachada() {
     }
 
-    public UsuarioPropietario agregarUsuarioPropietario(String cedula, String pwd, String nc,int saldo) {
+    public UsuarioPropietario agregarUsuarioPropietario(String cedula, String pwd, String nc,double saldo) {
         return sAcceso.agregarUsuarioPropietario(cedula, pwd, nc,saldo);
     }
     public UsuarioAdministrador agregarUsuarioAdministrador(String cedula, String pwd, String nc) {
@@ -49,6 +50,20 @@ public class Fachada extends Observable{
         return sAcceso.loginAdministrador(cedula, pwd);
     }
     
+    public UsuarioPropietario obtenerPropietarioPorCedula(String cedula) throws AccesoException{
+        return sAcceso.obtenerPropietarioPorCedula(cedula);
+    }
+    
+     public ArrayList<Conexion> getConexiones() {
+        return sAcceso.getConexiones();
+    }
+
+    public void logout(Conexion c) {
+        sAcceso.logout(c);
+    }
+    
+    
+    //SISTEMA TRANSITO
     public Vehiculo agregarVehiculo(String matricula, String color, String modelo,CategoriaVehiculo cat) throws DuplicadoException{
        return  sTransito.agregarVehiculo(matricula, color, modelo,cat);
     }
@@ -81,24 +96,33 @@ public class Fachada extends Observable{
         sTransito.agregarTransito(puesto, vehiculo, tarifa,bonificacion);
     }
     
-    public void agregarRecarga(double monto,UsuarioPropietario usr) throws NumeroNegativoException{
-        sTransito.agregarRecarga(monto,usr);
-        
+    public Vehiculo obtenerVehiculoByMatricula(String matricula) throws NoExiste{
+        return sTransito.getVehiculoByMatricula(matricula);
     }
-    
-    public UsuarioPropietario obtenerPropietarioPorCedula(String cedula) throws AccesoException{
-        return sAcceso.obtenerPropietarioPorCedula(cedula);
-    }
-    
+
     public ArrayList<Transito> obtenerTransitosDeUsuario(UsuarioPropietario u){
          return sTransito.obtenerTransitosDeUsuario(u);
         
     }
-    
+
+    //SISTEMA RECARGAS
     public ArrayList<Recarga> obtenerRecargasDeUsuario(UsuarioPropietario u){
-         return sTransito.obtenerRecargasDeUsuario(u);
+         return sRecarga.obtenerRecargasDeUsuario(u);
     }
-            
+    
+    public void agregarRecarga(double monto,UsuarioPropietario usr) throws NumeroNegativoException{
+        sRecarga.agregarRecarga(monto,usr);
+        
+    }
+    
+    public ArrayList<Recarga> obtenerRecargasPendientes(){
+         return sRecarga.obtenerRecargasPendientes();
+    }
+    public void AprobarRecarga(Recarga rec,UsuarioAdministrador admin){
+        sRecarga.AprobarRecarga(rec, admin);
+    }
+    
+    //SISTEMA BONIFICACION        
     public void agregarBonificacion(String nombre){
         sBonificacion.agregarBonificacion(nombre);
     }
@@ -111,18 +135,10 @@ public class Fachada extends Observable{
         sBonificacion.crearBonificacionAsignada(p, b, u);
     }
     
-    public Vehiculo obtenerVehiculoByMatricula(String matricula) throws NoExiste{
-        return sTransito.getVehiculoByMatricula(matricula);
-    }
+    
     
 
-    public ArrayList<Conexion> getConexiones() {
-        return sAcceso.getConexiones();
-    }
-
-    public void logout(Conexion c) {
-        sAcceso.logout(c);
-    }
+   
 
     
 }

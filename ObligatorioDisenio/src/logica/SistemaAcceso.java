@@ -18,7 +18,7 @@ public class SistemaAcceso {
     private ArrayList<UsuarioAdministrador> usuariosAdministradores = new ArrayList();
     private ArrayList<Conexion> conexiones = new ArrayList();
     
-    public UsuarioPropietario agregarUsuarioPropietario(String cedula,String pwd,String nc,int saldo){
+    public UsuarioPropietario agregarUsuarioPropietario(String cedula,String pwd,String nc,double saldo){
         UsuarioPropietario u = new UsuarioPropietario(cedula, nc, pwd,saldo);
         usuariosPropietarios.add(u);
         return u;

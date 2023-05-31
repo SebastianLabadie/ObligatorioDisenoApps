@@ -5,6 +5,7 @@
 package iuEscritorio;
 
 import Exceptions.NumeroNegativoException;
+import controlador.ControladorRecargarSaldo;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,22 +16,26 @@ import logica.Recarga.EstadoRec;
 import logica.UsuarioPropietario;
 import observador.Observable;
 import observador.Observador;
+import controlador.VistaRecargarSaldo;
 
 /**
  *
  * @author rodri
  */
-public class RecargarSaldo extends javax.swing.JFrame implements Observador {
+public class RecargarSaldo extends javax.swing.JFrame implements VistaRecargarSaldo {
     private UsuarioPropietario usuario;
-    private Recarga recarga;
+    
     /**
      * Creates new form RecargarSaldo
      */
+    
+    private ControladorRecargarSaldo controlador;
+    
     public RecargarSaldo(UsuarioPropietario usr) {
         initComponents();
         this.usuario = usr;
-        lNomUsuario.setText(usr.getNombreCompleto());
-        lSaldoUsuario1.setText(String.valueOf(usr.getSaldo()));
+        this.controlador = new ControladorRecargarSaldo(this,usr);
+        
     }
 
     /**
@@ -124,18 +129,7 @@ public class RecargarSaldo extends javax.swing.JFrame implements Observador {
     private void btnRecargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecargarActionPerformed
 // TODO add your handling code here:
         double monto = Double.parseDouble(tMontoARecargar.getText());
-        
-        Recarga rec = new Recarga(monto);
-        rec.agregarObservador(this);
-        try {
-            Fachada.getInstancia().agregarRecarga(monto,this.usuario);
-        } catch (NumeroNegativoException ex) {
-            JOptionPane.showMessageDialog(this,"Monto es menor a 1");
-        }
-        
-        this.recarga = rec;
-        
-        
+          controlador.recargarSaldo(monto);
     }//GEN-LAST:event_btnRecargarActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -183,7 +177,26 @@ public class RecargarSaldo extends javax.swing.JFrame implements Observador {
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void actualizar(Object evento, Observable origen) {
+    public void cargarDatosUsuario(UsuarioPropietario usr) {
+        lNomUsuario.setText(usr.getNombreCompleto());
+        lSaldoUsuario1.setText(String.valueOf(usr.getSaldo()));
+    }
+    
+     @Override
+    public void error(String message) {
+        JOptionPane.showMessageDialog(this, message,"Error",JOptionPane.ERROR_MESSAGE);
+    }
+    
+    @Override
+    public void exito(String message) {
+        JOptionPane.showMessageDialog(this, message,"Exito",JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    @Override
+    public void recargarSaldo() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+  
+    
 }

@@ -9,8 +9,7 @@ import observador.Observador;
 public class Recarga extends Observable{
     public enum EstadoRec{
         PENDIENTE,
-        ACEPTADA,
-        RECHAZADA//VER SI SIRVE
+        ACEPTADA
     }
     
     public enum eventos{cambioListaRecarga};
@@ -18,13 +17,15 @@ public class Recarga extends Observable{
     private EstadoRec estado;
     private Date fecha;
     private double monto;
-    private UsuarioAdministrador usr;
+    private UsuarioPropietario propietario;
+    private UsuarioAdministrador admin;
 
-    public Recarga(double monto) {
+    public Recarga(double monto,UsuarioPropietario propietario) {
         this.fecha = new Date();
         this.monto = monto;
         this.estado = EstadoRec.PENDIENTE;
-        this.usr = null;
+        this.admin = null;
+        this.propietario = propietario;
         avisar(eventos.cambioListaRecarga);
         Fachada.getInstancia().avisar(Fachada.eventos.cambioListaRecargas);
         
@@ -42,9 +43,26 @@ public class Recarga extends Observable{
         return fecha;
     }
 
-    public UsuarioAdministrador getUsr() {
-        return usr;
+    public UsuarioAdministrador getAdmin() {
+        return admin;
     }
+
+    public UsuarioPropietario getPropietario() {
+        return propietario;
+    }
+
+
+    public void setEstado(EstadoRec estado) {
+        this.estado = estado;
+    }
+
+    public void setAdmin(UsuarioAdministrador admin) {
+        this.admin = admin;
+    }
+    
+    
+    
+    
     
     
     
