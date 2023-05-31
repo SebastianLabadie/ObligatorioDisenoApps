@@ -59,7 +59,7 @@ public class SistemaTransito {
         //Validar que usuario tenga saldo suficiente
             //Hacer funcion para calcular monto si hay una bonificacion asignada
             //bonificacion.getBonificacion().getNombre().contains(s)
-        int costoTotal = 0;
+        double costoTotal = 0;
         if (bonificacion!=null) {
             costoTotal = tarifa.getMonto()  - bonificacion.getBonificacion().getDescuento(1);
         }else{

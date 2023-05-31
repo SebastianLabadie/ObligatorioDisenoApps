@@ -39,7 +39,7 @@ public class SistemaRecarga {
         
     }
     
-    public void AprobarRecarga(Recarga rec,UsuarioAdministrador admin){
+    public void aprobarRecarga(Recarga rec,UsuarioAdministrador admin){
         
         for(Recarga r:recargas){
             if(r.equals(rec)){
@@ -47,7 +47,7 @@ public class SistemaRecarga {
                 r.setAdmin(admin);
                 
                 UsuarioPropietario usr = r.getPropietario();
-                usr.AceptarRecarga(r,admin);
+                usr.aceptarRecarga(r,admin);
             
             }
                 

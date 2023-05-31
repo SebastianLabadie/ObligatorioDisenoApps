@@ -27,8 +27,8 @@ public class DatosPrueba {
         UsuarioAdministrador admin1 = fachada.agregarUsuarioAdministrador("a", "a", "Admin1");
         UsuarioAdministrador admin2 =  fachada.agregarUsuarioAdministrador("b", "b", "Admin2");
             
-        UsuarioPropietario propietario1 = fachada.agregarUsuarioPropietario("c", "c", "Propietario1",400);
-        UsuarioPropietario propietario2 = fachada.agregarUsuarioPropietario("d", "d", "Propietario2",50);
+        UsuarioPropietario propietario1 = fachada.agregarUsuarioPropietario("c", "c", "Propietario1",400.00);
+        UsuarioPropietario propietario2 = fachada.agregarUsuarioPropietario("d", "d", "Propietario2",50.00);
         
         try {
             //CARGA DE CATEGORIAS DE VEHICULOS

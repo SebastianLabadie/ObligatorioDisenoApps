@@ -118,8 +118,8 @@ public class Fachada extends Observable{
     public ArrayList<Recarga> obtenerRecargasPendientes(){
          return sRecarga.obtenerRecargasPendientes();
     }
-    public void AprobarRecarga(Recarga rec,UsuarioAdministrador admin){
-        sRecarga.AprobarRecarga(rec, admin);
+    public void aprobarRecarga(Recarga rec,UsuarioAdministrador admin){
+        sRecarga.aprobarRecarga(rec, admin);
     }
     
     //SISTEMA BONIFICACION        

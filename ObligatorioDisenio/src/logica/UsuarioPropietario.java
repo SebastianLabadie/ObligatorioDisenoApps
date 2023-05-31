@@ -65,7 +65,7 @@ public class UsuarioPropietario extends Usuario{
         this.saldo = saldo;
     }
     
-    public void AceptarRecarga(Recarga recarga,UsuarioAdministrador admin){
+    public void aceptarRecarga(Recarga recarga,UsuarioAdministrador admin){
         for(Recarga r:recargas){
             if(r.equals(recarga))
                 r.setEstado(Recarga.EstadoRec.ACEPTADA); 
