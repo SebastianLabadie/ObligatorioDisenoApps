@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class UsuarioPropietario extends Usuario{
     private ArrayList<Vehiculo> vehiculos;
     private ArrayList<Recarga> recargas;
-    private ArrayList<BonificacionAsignada> bonificaciones;
+    private ArrayList<BonificacionAsignada> bonificacionesAsignadas;
     private int saldo;
     
 
@@ -22,7 +22,7 @@ public class UsuarioPropietario extends Usuario{
         this.saldo = saldo;
         this.vehiculos = new ArrayList<>();
         this.recargas = new ArrayList<>();
-        this.bonificaciones = new ArrayList<>();
+        this.bonificacionesAsignadas = new ArrayList<>();
     }
 
     public ArrayList<Vehiculo> getVehiculos() {
@@ -45,12 +45,20 @@ public class UsuarioPropietario extends Usuario{
         vehiculos.add(v);
     }
     
-    public void agregarBonificacion(BonificacionAsignada b){
-        bonificaciones.add(b);
+    public void agregarBonificacionAsignada(BonificacionAsignada b){
+        bonificacionesAsignadas.add(b);
     }
     
     public ArrayList<BonificacionAsignada> obtenerBonificacionesAsignadas(){
-        return bonificaciones;
+        return bonificacionesAsignadas;
+    }
+    
+    public boolean bonificacionYaAsignada(Bonificacion b,Puesto p){
+        for (BonificacionAsignada ba : bonificacionesAsignadas) {
+            if (ba.getBonificacion().equals(b) && ba.getPuesto().equals(p)) return true;
+        }
+        
+        return false;
     }
 
     public void setSaldo(int saldo) {

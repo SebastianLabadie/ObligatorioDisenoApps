@@ -55,6 +55,7 @@ public class ControladorAsignarBonificacion {
        try {
            UsuarioPropietario u = fachada.obtenerPropietarioPorCedula(cedula);
            fachada.crearBonificacionAsignada(p, b, u);
+           vista.exito("Bonificacion asignada con exito.");
        } catch (AccesoException ex) {
             vista.error(ex.getMessage());
        } catch (BonificacionAsignadaException ex) {

@@ -85,6 +85,11 @@ public class AsignarBonificacion extends javax.swing.JDialog implements VistaAsi
         jScrollPane1.setViewportView(tablaBonificaciones);
 
         btnAsignar.setText("Asignar");
+        btnAsignar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAsignarActionPerformed(evt);
+            }
+        });
 
         btnCerrar.setText("Cerrar");
         btnCerrar.addActionListener(new java.awt.event.ActionListener() {
@@ -180,6 +185,14 @@ public class AsignarBonificacion extends javax.swing.JDialog implements VistaAsi
         // TODO add your handling code here:
         controlador.buscarPropietario(tfCedula.getText());
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnAsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsignarActionPerformed
+        // TODO add your handling code here:
+        Bonificacion b =(Bonificacion)cbBonificaciones.getSelectedItem();
+        Puesto p=(Puesto) cbPuestos.getSelectedItem();
+        String c=tfCedula.getText();
+        controlador.asignarBonificacion(b, p, c);
+    }//GEN-LAST:event_btnAsignarActionPerformed
 
     /**
      * @param args the command line arguments

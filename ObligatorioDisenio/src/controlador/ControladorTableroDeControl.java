@@ -81,6 +81,13 @@ public class ControladorTableroDeControl implements Observador {
             mostrarTransitos();
         }
         
+        if(evento.equals(Fachada.eventos.cambioListaBonificacionAsignada)){
+            this.bonificacionesAsignadas = usuario.obtenerBonificacionesAsignadas();
+            
+            remplazarLabels();
+            mostrarBonificacionesAsignadas();
+        }
+        
     }
     
 }

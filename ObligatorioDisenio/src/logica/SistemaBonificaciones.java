@@ -39,10 +39,11 @@ public class SistemaBonificaciones {
         if(p ==null) throw new BonificacionAsignadaException("Debe especificar un puesto");
         if(b ==null) throw new BonificacionAsignadaException("Debe especificar una bonificación");
         
-        //validar que usuario no tenga una bonificacion para ese mismo puesto ya asignada
+        if (u.bonificacionYaAsignada(b, p)) throw new BonificacionAsignadaException("Ya tiene una bonificación asignada para ese puesto");
         
         BonificacionAsignada ba = new BonificacionAsignada(b, p);
-        u.agregarBonificacion(ba);
+        u.agregarBonificacionAsignada(ba);
+        Fachada.getInstancia().avisar(Fachada.eventos.cambioListaBonificacionAsignada);
     }
     
 }

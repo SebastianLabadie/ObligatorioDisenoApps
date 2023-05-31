@@ -27,7 +27,12 @@ public abstract class Bonificacion {
     }
     
     
-    
+    @Override
+    public boolean equals(Object obj) {
+        Bonificacion otraBonificacion = (Bonificacion)obj;
+        
+        return this.nombre.equals(otraBonificacion.getNombre());
+    }
     
     
 }
