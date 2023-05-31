@@ -4,6 +4,7 @@
  */
 package inicio;
 
+import Exceptions.BonificacionAsignadaException;
 import Exceptions.DuplicadoException;
 import Exceptions.TransitoException;
 import java.util.logging.Level;
@@ -86,12 +87,14 @@ public class DatosPrueba {
             
             
             //AGREGAR TRANSITO PRUEBA
-            fachada.agregarTransito(fachada.obtenerPuestos().get(0), v1, fachada.obtenerTarifas().get(0),propietario1.obtenerBonificaciones().get(0));
+            fachada.agregarTransito(fachada.obtenerPuestos().get(0), v1, fachada.obtenerTarifas().get(0),propietario1.obtenerBonificacionesAsignadas().get(0));
             
         }
         catch (DuplicadoException ex) {
             Logger.getLogger(DatosPrueba.class.getName()).log(Level.SEVERE, null, ex);
         } catch (TransitoException ex) {
+            Logger.getLogger(DatosPrueba.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (BonificacionAsignadaException ex) {
             Logger.getLogger(DatosPrueba.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

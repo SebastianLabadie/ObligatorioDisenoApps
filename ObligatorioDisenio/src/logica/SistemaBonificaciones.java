@@ -4,6 +4,7 @@
  */
 package logica;
 
+import Exceptions.BonificacionAsignadaException;
 import java.util.ArrayList;
 
 /**
@@ -34,7 +35,12 @@ public class SistemaBonificaciones {
         return bonificaciones;
     }
     
-    public void crearBonificacionAsignada(Puesto p,Bonificacion b, UsuarioPropietario u){
+    public void crearBonificacionAsignada(Puesto p,Bonificacion b, UsuarioPropietario u) throws BonificacionAsignadaException{
+        if(p ==null) throw new BonificacionAsignadaException("Debe especificar un puesto");
+        if(b ==null) throw new BonificacionAsignadaException("Debe especificar una bonificación");
+        
+        //validar que usuario no tenga una bonificacion para ese mismo puesto ya asignada
+        
         BonificacionAsignada ba = new BonificacionAsignada(b, p);
         u.agregarBonificacion(ba);
     }

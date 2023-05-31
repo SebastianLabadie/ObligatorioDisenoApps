@@ -20,6 +20,14 @@ public abstract class Bonificacion {
     }
     
     public abstract int getDescuento(int cantidadTransitos);
+
+    @Override
+    public String toString() {
+        return  nombre ;
+    }
+    
+    
+    
     
     
 }

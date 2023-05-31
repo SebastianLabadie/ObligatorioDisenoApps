@@ -49,7 +49,7 @@ public class UsuarioPropietario extends Usuario{
         bonificaciones.add(b);
     }
     
-    public ArrayList<BonificacionAsignada> obtenerBonificaciones(){
+    public ArrayList<BonificacionAsignada> obtenerBonificacionesAsignadas(){
         return bonificaciones;
     }
 

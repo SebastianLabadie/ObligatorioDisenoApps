@@ -22,7 +22,7 @@ public class ControladorTableroDeControl implements Observador {
     private Recarga recarga;
     private ArrayList<Transito> transitos;
     private ArrayList<Recarga> recargas;
-    private ArrayList<BonificacionAsignada> bonificaciones;
+    private ArrayList<BonificacionAsignada> bonificacionesAsignadas;
     private VistaTableroDeControl vista;
 
     public ControladorTableroDeControl(UsuarioPropietario usuario,VistaTableroDeControl vista) {
@@ -41,11 +41,11 @@ public class ControladorTableroDeControl implements Observador {
     {
         this.transitos = Fachada.getInstancia().obtenerTransitosDeUsuario(this.usuario);
         this.recargas = Fachada.getInstancia().obtenerRecargasDeUsuario(this.usuario);
-        this.bonificaciones = this.usuario.obtenerBonificaciones();
+        this.bonificacionesAsignadas = this.usuario.obtenerBonificacionesAsignadas();
     }
     
     public void remplazarLabels(){
-        vista.remplazarLabels(usuario, transitos, bonificaciones,recargas);   
+        vista.remplazarLabels(usuario, transitos, bonificacionesAsignadas,recargas);   
     }
     
     public void mostrarVehiculos(){
@@ -61,7 +61,7 @@ public class ControladorTableroDeControl implements Observador {
     }
      
       public void mostrarBonificacionesAsignadas(){
-        vista.mostrarBonificacionesAsignadas(bonificaciones);
+        vista.mostrarBonificacionesAsignadas(bonificacionesAsignadas);
     }
     
     

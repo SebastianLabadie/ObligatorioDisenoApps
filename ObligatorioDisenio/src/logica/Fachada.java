@@ -1,5 +1,7 @@
 package logica;
 
+import Exceptions.AccesoException;
+import Exceptions.BonificacionAsignadaException;
 import Exceptions.DuplicadoException;
 import Exceptions.LoginException;
 import Exceptions.NoExiste;
@@ -84,6 +86,9 @@ public class Fachada extends Observable{
         
     }
     
+    public UsuarioPropietario obtenerPropietarioPorCedula(String cedula) throws AccesoException{
+        return sAcceso.obtenerPropietarioPorCedula(cedula);
+    }
     
     public ArrayList<Transito> obtenerTransitosDeUsuario(UsuarioPropietario u){
          return sTransito.obtenerTransitosDeUsuario(u);
@@ -102,7 +107,7 @@ public class Fachada extends Observable{
         return sBonificacion.obtenerBonificaciones();
     }
     
-    public void crearBonificacionAsignada(Puesto p,Bonificacion b, UsuarioPropietario u){
+    public void crearBonificacionAsignada(Puesto p,Bonificacion b, UsuarioPropietario u) throws BonificacionAsignadaException{
         sBonificacion.crearBonificacionAsignada(p, b, u);
     }
     

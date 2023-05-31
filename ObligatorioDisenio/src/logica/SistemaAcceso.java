@@ -4,6 +4,7 @@
  */
 package logica;
 
+import Exceptions.AccesoException;
 import Exceptions.LoginException;
 import java.util.ArrayList;
 
@@ -41,6 +42,8 @@ public class SistemaAcceso {
 //            Fachada.getInstancia().avisar(Fachada.eventos.cambioListaConexiones);
         return c;
     }
+    
+    
     private Usuario login(String cedula,String pwd,ArrayList usuarios) throws LoginException{
         Usuario u;
         for(Object o:usuarios){
@@ -52,13 +55,12 @@ public class SistemaAcceso {
         throw new LoginException("Acceso denegado");
     } 
     
-    public void administradorYaConectado(Usuario u) throws LoginException{
+    private void administradorYaConectado(Usuario u) throws LoginException{
         for (Conexion c: conexiones) {
             if (c.getUsuario().getCedula().equals(u.getCedula())) {
                throw new LoginException("Ud. Ya está logueado");
             }
         }
-        
     }
 
     public ArrayList<Conexion> getConexiones() {
@@ -67,5 +69,16 @@ public class SistemaAcceso {
     public void logout(Conexion c){
         conexiones.remove(c);
 //        Fachada.getInstancia().avisar(Fachada.eventos.cambioListaConexiones);
+    }
+    
+    
+    public UsuarioPropietario obtenerPropietarioPorCedula(String cedula) throws AccesoException{
+        for(UsuarioPropietario u:usuariosPropietarios){
+            if(u.getCedula().equals(cedula)){
+                return u;
+            }
+        }
+        
+        throw new AccesoException("No existe el propietario");
     }
 }

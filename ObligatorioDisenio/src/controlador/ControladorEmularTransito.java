@@ -60,8 +60,8 @@ public class ControladorEmularTransito{
             //buscar si el usuario tiene bonificaciones en el puesto seleccionado
              UsuarioPropietario u = v.getPropietario();
              BonificacionAsignada bonificacion=null;
-             for (BonificacionAsignada b : u.obtenerBonificaciones()) {
-                 if (b.getPuesto().equals(p))  bonificacion=b;
+             for (BonificacionAsignada ba : u.obtenerBonificacionesAsignadas()) {
+                 if (ba.getPuesto().equals(p))  bonificacion=ba;
             }
              
             

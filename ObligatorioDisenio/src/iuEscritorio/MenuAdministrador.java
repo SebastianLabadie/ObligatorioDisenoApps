@@ -69,6 +69,16 @@ public class MenuAdministrador extends javax.swing.JFrame {
         jMenuBar1.add(itemAprobarRecarga);
 
         itemAsignarBonificacion.setText("Asignar Bonificacion");
+        itemAsignarBonificacion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                itemAsignarBonificacionMouseClicked(evt);
+            }
+        });
+        itemAsignarBonificacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemAsignarBonificacionActionPerformed(evt);
+            }
+        });
         jMenuBar1.add(itemAsignarBonificacion);
 
         itemSalir.setText("Salir");
@@ -129,6 +139,16 @@ public class MenuAdministrador extends javax.swing.JFrame {
         // TODO add your handling code here:
         new EmularTransito(this,false).setVisible(true);
     }//GEN-LAST:event_itemEmularTransitoMouseClicked
+
+    private void itemAsignarBonificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAsignarBonificacionActionPerformed
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_itemAsignarBonificacionActionPerformed
+
+    private void itemAsignarBonificacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_itemAsignarBonificacionMouseClicked
+        // TODO add your handling code here:
+        new AsignarBonificacion(this, false).setVisible(true);
+    }//GEN-LAST:event_itemAsignarBonificacionMouseClicked
 
     /**
      * @param args the command line arguments
