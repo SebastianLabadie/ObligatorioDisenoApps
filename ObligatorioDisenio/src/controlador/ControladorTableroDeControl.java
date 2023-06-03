@@ -7,6 +7,7 @@ package controlador;
 import java.util.ArrayList;
 import logica.BonificacionAsignada;
 import logica.Fachada;
+import logica.Notificacion;
 import logica.Recarga;
 import logica.Transito;
 import logica.UsuarioPropietario;
@@ -23,6 +24,7 @@ public class ControladorTableroDeControl implements Observador {
     private ArrayList<Transito> transitos;
     private ArrayList<Recarga> recargas;
     private ArrayList<BonificacionAsignada> bonificacionesAsignadas;
+    private ArrayList<Notificacion> notificaciones;
     private VistaTableroDeControl vista;
 
     public ControladorTableroDeControl(UsuarioPropietario usuario,VistaTableroDeControl vista) {
@@ -35,6 +37,7 @@ public class ControladorTableroDeControl implements Observador {
         mostrarRecargas();
         mostrarTransitos();
         mostrarBonificacionesAsignadas();
+        mostrarNotificaciones();
     }
     
     public void cargarDatos()
@@ -42,10 +45,11 @@ public class ControladorTableroDeControl implements Observador {
         this.transitos = Fachada.getInstancia().obtenerTransitosDeUsuario(this.usuario);
         this.recargas = Fachada.getInstancia().obtenerRecargasDeUsuario(this.usuario);
         this.bonificacionesAsignadas = this.usuario.obtenerBonificacionesAsignadas();
+        this.notificaciones = this.usuario.getNotificaciones();
     }
     
     public void remplazarLabels(){
-        vista.remplazarLabels(usuario, transitos, bonificacionesAsignadas,recargas);   
+        vista.remplazarLabels(usuario, transitos, bonificacionesAsignadas,recargas,notificaciones);   
     }
     
     public void mostrarVehiculos(){
@@ -60,10 +64,13 @@ public class ControladorTableroDeControl implements Observador {
         vista.mostrarRecargas(recargas);
     }
      
-      public void mostrarBonificacionesAsignadas(){
+    public void mostrarBonificacionesAsignadas(){
         vista.mostrarBonificacionesAsignadas(bonificacionesAsignadas);
     }
     
+    public void mostrarNotificaciones(){
+        vista.mostrarNotificaciones(notificaciones);
+    }
     
     
     @Override
@@ -88,6 +95,13 @@ public class ControladorTableroDeControl implements Observador {
             mostrarBonificacionesAsignadas();
         }
         
+        
+        if(evento.equals(Fachada.eventos.cambioListaNotificaciones)){
+            this.notificaciones = this.usuario.getNotificaciones();
+            
+            remplazarLabels();
+            mostrarNotificaciones();
+        }
     }
     
 }

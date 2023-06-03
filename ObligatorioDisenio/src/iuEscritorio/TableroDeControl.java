@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import logica.BonificacionAsignada;
 import logica.Fachada;
+import logica.Notificacion;
 import logica.Transito;
 import logica.UsuarioPropietario;
 import logica.Recarga;
@@ -64,8 +65,13 @@ public class TableroDeControl extends javax.swing.JFrame implements VistaTablero
         lCantBonificaciones = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tablaBonificaciones = new javax.swing.JTable();
+        btnCerrar = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tablaNotificaciones = new javax.swing.JTable();
+        lCantNotificaciones = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1051, 1000));
 
         lNombreUsuario.setText("Nombre Usuario");
 
@@ -80,6 +86,8 @@ public class TableroDeControl extends javax.swing.JFrame implements VistaTablero
         lCantVehiculos.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         lCantVehiculos.setText("cVe");
 
+        tablaVehiculos.setMinimumSize(new java.awt.Dimension(60, 60));
+        tablaVehiculos.setPreferredSize(new java.awt.Dimension(300, 60));
         jScrollPane1.setViewportView(tablaVehiculos);
 
         lCantTransitos.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
@@ -104,82 +112,99 @@ public class TableroDeControl extends javax.swing.JFrame implements VistaTablero
 
         jScrollPane4.setViewportView(tablaBonificaciones);
 
+        btnCerrar.setText("Cerrar");
+        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarActionPerformed(evt);
+            }
+        });
+
+        jScrollPane5.setViewportView(tablaNotificaciones);
+
+        lCantNotificaciones.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        lCantNotificaciones.setText("cNO");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(l1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lSaldoUsuario)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lNombreUsuario)
-                .addGap(26, 26, 26))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lCantRecargas)
-                            .addComponent(btnRecargar)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(90, 90, 90)
-                        .addComponent(lCantTransitos))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(84, 84, 84)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lCantVehiculos)
-                            .addComponent(lCantBonificaciones))))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 909, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 909, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 909, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 909, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(538, Short.MAX_VALUE)
+                .addComponent(btnCerrar)
+                .addGap(464, 464, 464))
             .addGroup(layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 904, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(101, 101, 101))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(80, 80, 80)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lCantNotificaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lCantRecargas)
+                                    .addComponent(lCantTransitos)
+                                    .addComponent(lCantBonificaciones)
+                                    .addComponent(lCantVehiculos)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(btnRecargar)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 903, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 903, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 913, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 909, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 910, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 980, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(l1)
+                        .addGap(6, 6, 6)
+                        .addComponent(lSaldoUsuario)
+                        .addGap(765, 765, 765)
+                        .addComponent(lNombreUsuario)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jScrollPane1, jScrollPane2, jScrollPane3, jScrollPane4});
-
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lNombreUsuario)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(l1)
-                    .addComponent(lSaldoUsuario))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(lSaldoUsuario)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(lNombreUsuario)))
+                .addGap(6, 6, 6)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lCantVehiculos)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(51, 51, 51)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lCantBonificaciones))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 184, Short.MAX_VALUE)
+                    .addComponent(lCantBonificaciones)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lCantTransitos))
-                .addGap(47, 47, 47)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
+                    .addComponent(lCantTransitos)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(lCantRecargas)
-                        .addGap(43, 43, 43)
-                        .addComponent(btnRecargar)))
-                .addGap(44, 44, 44))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnRecargar))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lCantNotificaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addComponent(btnCerrar)
+                .addContainerGap())
         );
-
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jScrollPane1, jScrollPane2, jScrollPane3, jScrollPane4});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -188,6 +213,11 @@ public class TableroDeControl extends javax.swing.JFrame implements VistaTablero
         // TODO add your handling code here:
          new RecargarSaldo(usuario).setVisible(true);
     }//GEN-LAST:event_btnRecargarActionPerformed
+
+    private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnCerrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -200,33 +230,38 @@ public class TableroDeControl extends javax.swing.JFrame implements VistaTablero
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnRecargar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel l1;
     private javax.swing.JLabel lCantBonificaciones;
+    private javax.swing.JLabel lCantNotificaciones;
     private javax.swing.JLabel lCantRecargas;
     private javax.swing.JLabel lCantTransitos;
     private javax.swing.JLabel lCantVehiculos;
     private javax.swing.JLabel lNombreUsuario;
     private javax.swing.JLabel lSaldoUsuario;
     private javax.swing.JTable tablaBonificaciones;
+    private javax.swing.JTable tablaNotificaciones;
     private javax.swing.JTable tablaTransitos;
     private javax.swing.JTable tablaVehiculos;
     private javax.swing.JTable tblRecargas;
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void remplazarLabels(UsuarioPropietario u, ArrayList<Transito> t, ArrayList<BonificacionAsignada> b,ArrayList<Recarga> r) {
+    public void remplazarLabels(UsuarioPropietario u, ArrayList<Transito> t, ArrayList<BonificacionAsignada> b,ArrayList<Recarga> r,ArrayList<Notificacion> n) {
         lNombreUsuario.setText(u.getNombreCompleto());
         lSaldoUsuario.setText(""+u.getSaldo());
         lCantVehiculos.setText(""+u.getVehiculos().size());
         lCantTransitos.setText(""+t.size());
         lCantBonificaciones.setText(""+b.size());
         lCantRecargas.setText(""+r.size());
+        lCantNotificaciones.setText(""+n.size());
     }
 
     @Override
@@ -282,7 +317,7 @@ public class TableroDeControl extends javax.swing.JFrame implements VistaTablero
       
             fila++;
        }
-        tablaTransitos.setModel(datos);
+       tablaTransitos.setModel(datos);
     }
 
     @Override
@@ -304,7 +339,7 @@ public class TableroDeControl extends javax.swing.JFrame implements VistaTablero
             datos.setValueAt(r.getAdmin(), fila, 3);
             fila++;
        }
-        tblRecargas.setModel(datos);
+       tblRecargas.setModel(datos);
     }
 
     @Override
@@ -325,6 +360,24 @@ public class TableroDeControl extends javax.swing.JFrame implements VistaTablero
       
             fila++;
        }
-        tablaBonificaciones.setModel(datos);
+       tablaBonificaciones.setModel(datos);
+    }
+
+    @Override
+    public void mostrarNotificaciones(ArrayList<Notificacion> notificaciones) {
+       DefaultTableModel datos = new DefaultTableModel();
+        datos.addColumn("Fecha");
+        datos.addColumn("Mensaje");
+        
+        datos.setRowCount(notificaciones.size());
+        int fila = 0;
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+        for(Notificacion n:notificaciones){
+            datos.setValueAt(n.getFecha(), fila, 0);
+            datos.setValueAt(n.getMensaje(), fila, 1);
+      
+            fila++;
+       }
+       tablaNotificaciones.setModel(datos);
     }
 }

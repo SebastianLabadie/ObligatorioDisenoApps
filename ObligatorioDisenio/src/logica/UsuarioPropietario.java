@@ -14,6 +14,7 @@ public class UsuarioPropietario extends Usuario{
     private ArrayList<Vehiculo> vehiculos;
     private ArrayList<Recarga> recargas;
     private ArrayList<BonificacionAsignada> bonificacionesAsignadas;
+    private ArrayList<Notificacion> notificaciones;
     private double saldo;
     
 
@@ -23,6 +24,7 @@ public class UsuarioPropietario extends Usuario{
         this.vehiculos = new ArrayList<>();
         this.recargas = new ArrayList<>();
         this.bonificacionesAsignadas = new ArrayList<>();
+        this.notificaciones = new ArrayList<>();
     }
 
     public ArrayList<Vehiculo> getVehiculos() {
@@ -39,6 +41,14 @@ public class UsuarioPropietario extends Usuario{
 
     public ArrayList<Recarga> getRecargas() {
         return recargas;
+    }
+
+    public ArrayList<Notificacion> getNotificaciones() {
+        return notificaciones;
+    }
+    
+    public void agregarNotificacion(Notificacion n){
+        notificaciones.add(n);
     }
     
     public void asociarVehiculo(Vehiculo v){

@@ -16,7 +16,7 @@ import observador.Observable;
  */
 public class Fachada extends Observable{
     
-    public enum eventos{cambioListaConexiones,cambioListaRecargas,cambioListaTransitos,cambioListaBonificacionAsignada};
+    public enum eventos{cambioListaConexiones,cambioListaRecargas,cambioListaTransitos,cambioListaBonificacionAsignada,cambioListaNotificaciones};
     
     private SistemaAcceso sAcceso = new SistemaAcceso();
     private SistemaTransito sTransito = new SistemaTransito();

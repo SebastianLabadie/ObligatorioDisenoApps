@@ -57,7 +57,6 @@ public class SistemaTransito {
     public void agregarTransito(Puesto puesto,Vehiculo vehiculo, Tarifa tarifa,BonificacionAsignada bonificacion ) throws TransitoException{
         
         //Validar que usuario tenga saldo suficiente
-            //Hacer funcion para calcular monto si hay una bonificacion asignada
             //bonificacion.getBonificacion().getNombre().contains(s)
         double costoTotal = 0;
         if (bonificacion!=null) {
@@ -75,6 +74,18 @@ public class SistemaTransito {
         transitos.add(t);
         propietario.setSaldo(propietario.getSaldo()-costoTotal);
         Fachada.getInstancia().avisar(Fachada.eventos.cambioListaTransitos);
+        
+        //Crear notificacion 
+        Notificacion notPuesto = new Notificacion("Pasaste por el puesto "+puesto.getNombre()+" con el vehículo "+vehiculo.getMatricula()+".");
+        propietario.agregarNotificacion(notPuesto);
+        
+        //Notificacion de saldo minimo
+        if (Fachada.saldoMinimo >= propietario.getSaldo()) {
+            Notificacion notSaldo = new Notificacion("Tu saldo actual es de $"+propietario.getSaldo()+" te recomendamos hacer una recarga.");
+            propietario.agregarNotificacion(notSaldo);
+        }
+        
+        Fachada.getInstancia().avisar(Fachada.eventos.cambioListaNotificaciones);
     }
     
     
