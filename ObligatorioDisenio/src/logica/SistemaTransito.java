@@ -60,7 +60,8 @@ public class SistemaTransito {
             //bonificacion.getBonificacion().getNombre().contains(s)
         double costoTotal = 0;
         if (bonificacion!=null) {
-            costoTotal = tarifa.getMonto()  - bonificacion.getBonificacion().getDescuento(1);
+            //fe transito if puesto and vehiculo and dia 
+            costoTotal = tarifa.getMonto()  - bonificacion.getBonificacion().getDescuento(transitosPorPuestoYMatricula(puesto,vehiculo));
         }else{
             costoTotal = tarifa.getMonto();
         }
@@ -88,8 +89,23 @@ public class SistemaTransito {
         Fachada.getInstancia().avisar(Fachada.eventos.cambioListaNotificaciones);
     }
     
+    private int transitosPorPuestoYMatricula(Puesto p,Vehiculo v){
+        int cantidad = 0;
+        for (Transito t : transitos) {
+            if (t.getPuesto().equals(p) && t.getVehiculo().equals(v) && compararFechas(t.getFechaIngreso(), new Date())) {
+                cantidad+=1;
+            }
+        }
+        
+        return cantidad;
+    }
     
-     public ArrayList<Transito> obtenerTransitosDeUsuario(UsuarioPropietario u){
+    private boolean compararFechas(Date f1,Date f2){
+        return f1.getYear() == f2.getYear() && f1.getMonth()== f2.getMonth()  && f1.getDay()== f2.getDay() ;
+    }
+    
+    
+    public ArrayList<Transito> obtenerTransitosDeUsuario(UsuarioPropietario u){
          ArrayList<Transito> ret = new ArrayList<>();
          for (Transito t : transitos) {
              if (t.getVehiculo().getPropietario().equals(u)) {

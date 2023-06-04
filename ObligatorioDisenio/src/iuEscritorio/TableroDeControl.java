@@ -70,8 +70,13 @@ public class TableroDeControl extends javax.swing.JFrame implements VistaTablero
         tablaNotificaciones = new javax.swing.JTable();
         lCantNotificaciones = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1051, 1000));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         lNombreUsuario.setText("Nombre Usuario");
 
@@ -216,8 +221,13 @@ public class TableroDeControl extends javax.swing.JFrame implements VistaTablero
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
         // TODO add your handling code here:
-        this.dispose();
+        salir();
     }//GEN-LAST:event_btnCerrarActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        salir();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -379,5 +389,10 @@ public class TableroDeControl extends javax.swing.JFrame implements VistaTablero
             fila++;
        }
        tablaNotificaciones.setModel(datos);
+    }
+    
+    private void salir(){
+        controlador.salir();
+        this.dispose();
     }
 }

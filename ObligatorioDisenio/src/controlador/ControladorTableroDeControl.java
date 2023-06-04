@@ -72,6 +72,10 @@ public class ControladorTableroDeControl implements Observador {
         vista.mostrarNotificaciones(notificaciones);
     }
     
+    public void salir(){
+         Fachada.getInstancia().quitarObservador(this);
+    }
+    
     
     @Override
     public void actualizar(Object evento, Observable origen) {

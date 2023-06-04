@@ -27,7 +27,7 @@ public class DatosPrueba {
         UsuarioAdministrador admin1 = fachada.agregarUsuarioAdministrador("a", "a", "Admin1");
         UsuarioAdministrador admin2 =  fachada.agregarUsuarioAdministrador("b", "b", "Admin2");
             
-        UsuarioPropietario propietario1 = fachada.agregarUsuarioPropietario("c", "c", "Propietario1",400.00);
+        UsuarioPropietario propietario1 = fachada.agregarUsuarioPropietario("c", "c", "Propietario1",600.00);
         UsuarioPropietario propietario2 = fachada.agregarUsuarioPropietario("d", "d", "Propietario2",50.00);
         
         try {
@@ -83,7 +83,7 @@ public class DatosPrueba {
             
             
             //ASIGNAR BONIFICACIONES
-            fachada.crearBonificacionAsignada(fachada.obtenerPuestos().get(0), fachada.obtenerBonificaciones().get(0), propietario1);
+            fachada.crearBonificacionAsignada(fachada.obtenerPuestos().get(0), fachada.obtenerBonificaciones().get(4), propietario1);
             
             
             //AGREGAR TRANSITO PRUEBA

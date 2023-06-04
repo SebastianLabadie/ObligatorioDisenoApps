@@ -48,6 +48,13 @@ public class Vehiculo {
     public void asignarPropietario(UsuarioPropietario u){
         this.propietario = u;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        Vehiculo otroVehiculo = (Vehiculo)obj;
+        
+        return this.matricula.equals(otroVehiculo.getMatricula());
+    }
     
     
     
