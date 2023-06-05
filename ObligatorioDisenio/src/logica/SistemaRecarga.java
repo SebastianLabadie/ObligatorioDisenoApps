@@ -6,6 +6,7 @@ package logica;
 
 import Exceptions.NumeroNegativoException;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -48,7 +49,11 @@ public class SistemaRecarga {
                 
                 UsuarioPropietario usr = r.getPropietario();
                 usr.aceptarRecarga(r,admin);
-            
+                Fachada.getInstancia().avisar(Fachada.eventos.cambioListaRecargas);
+                //Crear notificacion
+                Notificacion notificacion = new Notificacion(new Date()+" Tu recarga de $" +rec.getMonto()+" fue aprobada.");
+                usr.agregarNotificacion(notificacion);
+                Fachada.getInstancia().avisar(Fachada.eventos.cambioListaNotificaciones);
             }
                 
                 

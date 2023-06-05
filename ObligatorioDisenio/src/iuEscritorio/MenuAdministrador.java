@@ -6,6 +6,7 @@ package iuEscritorio;
 
 import logica.Conexion;
 import logica.Fachada;
+import logica.UsuarioAdministrador;
 
 /**
  *
@@ -17,9 +18,10 @@ public class MenuAdministrador extends javax.swing.JFrame {
      * Creates new form MenuAdministrador
      */
     private Conexion conexion;
-    public MenuAdministrador(Conexion c) {
+    private UsuarioAdministrador usr;
+    public MenuAdministrador(UsuarioAdministrador usr) {
         initComponents();
-        conexion = c;
+        this.usr = usr;
         setLocationRelativeTo(null);
     }
 
@@ -66,6 +68,16 @@ public class MenuAdministrador extends javax.swing.JFrame {
         jMenuBar1.add(itemEmularTransito);
 
         itemAprobarRecarga.setText("Aprobar Recarga");
+        itemAprobarRecarga.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                itemAprobarRecargaMouseClicked(evt);
+            }
+        });
+        itemAprobarRecarga.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemAprobarRecargaActionPerformed(evt);
+            }
+        });
         jMenuBar1.add(itemAprobarRecarga);
 
         itemAsignarBonificacion.setText("Asignar Bonificacion");
@@ -149,6 +161,15 @@ public class MenuAdministrador extends javax.swing.JFrame {
         // TODO add your handling code here:
         new AsignarBonificacion(this, false).setVisible(true);
     }//GEN-LAST:event_itemAsignarBonificacionMouseClicked
+
+    private void itemAprobarRecargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAprobarRecargaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_itemAprobarRecargaActionPerformed
+
+    private void itemAprobarRecargaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_itemAprobarRecargaMouseClicked
+        // TODO add your handling code here:
+        new ConfirmarRecarga(usr).setVisible(true);
+    }//GEN-LAST:event_itemAprobarRecargaMouseClicked
 
     /**
      * @param args the command line arguments

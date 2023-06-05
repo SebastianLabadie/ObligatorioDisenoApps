@@ -8,6 +8,7 @@ import Exceptions.LoginException;
 import java.awt.Frame;
 import logica.Conexion;
 import logica.Fachada;
+import logica.UsuarioAdministrador;
 
 /**
  *
@@ -27,7 +28,7 @@ public class LoginAdministrador extends LoginAbstracto{
 
     @Override
     public void mostrarProximoCasoUso(Object obj) {
-        new MenuAdministrador((Conexion)obj).setVisible(true);
+        new MenuAdministrador((UsuarioAdministrador)obj).setVisible(true);
     }
     
 }

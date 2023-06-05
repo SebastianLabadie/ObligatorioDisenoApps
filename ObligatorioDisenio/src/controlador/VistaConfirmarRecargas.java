@@ -6,6 +6,7 @@ package controlador;
 
 import java.util.ArrayList;
 import logica.Recarga;
+import logica.UsuarioAdministrador;
 import logica.UsuarioPropietario;
 
 /**
@@ -14,7 +15,7 @@ import logica.UsuarioPropietario;
  */
 public interface VistaConfirmarRecargas {
     public void ObtenerRecargasPendientes(ArrayList<Recarga> rec);
-    public void AceptarRecarga(Recarga rec,UsuarioPropietario admin);
+    public void AceptarRecarga(Recarga rec,UsuarioAdministrador admin);
     public void error(String message);
     public void exito(String message);
     

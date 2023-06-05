@@ -46,7 +46,7 @@ public class Fachada extends Observable{
             
     }
 
-    public Conexion loginAdministrador(String cedula, String pwd) throws LoginException {
+    public UsuarioAdministrador loginAdministrador(String cedula, String pwd) throws LoginException {
         return sAcceso.loginAdministrador(cedula, pwd);
     }
     

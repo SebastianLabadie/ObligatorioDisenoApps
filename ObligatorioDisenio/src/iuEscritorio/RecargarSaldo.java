@@ -128,8 +128,8 @@ public class RecargarSaldo extends javax.swing.JFrame implements VistaRecargarSa
 
     private void btnRecargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecargarActionPerformed
 // TODO add your handling code here:
-        double monto = Double.parseDouble(tMontoARecargar.getText());
-          controlador.recargarSaldo(monto);
+    recargarSaldo();
+        
     }//GEN-LAST:event_btnRecargarActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -190,11 +190,13 @@ public class RecargarSaldo extends javax.swing.JFrame implements VistaRecargarSa
     @Override
     public void exito(String message) {
         JOptionPane.showMessageDialog(this, message,"Exito",JOptionPane.INFORMATION_MESSAGE);
+        this.dispose();
     }
 
     @Override
     public void recargarSaldo() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        double monto = Double.parseDouble(tMontoARecargar.getText());
+         controlador.recargarSaldo(monto);
     }
 
   

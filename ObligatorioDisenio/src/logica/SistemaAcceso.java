@@ -34,13 +34,13 @@ public class SistemaAcceso {
         return (UsuarioPropietario)u;
     }
     
-    public Conexion loginAdministrador(String cedula,String pwd) throws LoginException{
+    public UsuarioAdministrador loginAdministrador(String cedula,String pwd) throws LoginException{
         Usuario u = login(cedula,pwd,usuariosAdministradores);
         administradorYaConectado(u);
         Conexion c = new Conexion((UsuarioAdministrador)u);
         conexiones.add(c);
 //            Fachada.getInstancia().avisar(Fachada.eventos.cambioListaConexiones);
-        return c;
+        return (UsuarioAdministrador)u;
     }
     
     

@@ -346,7 +346,9 @@ public class TableroDeControl extends javax.swing.JFrame implements VistaTablero
             datos.setValueAt(sdf.format(r.getFecha()), fila, 0);
             datos.setValueAt(r.getMonto(), fila, 1);
             datos.setValueAt(r.getEstado(), fila, 2);
-            datos.setValueAt(r.getAdmin(), fila, 3);
+            if(r.getAdmin()!=null){
+                datos.setValueAt(r.getAdmin().getNombreCompleto(), fila, 3);
+            }
             fila++;
        }
        tblRecargas.setModel(datos);
