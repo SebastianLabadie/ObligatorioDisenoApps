@@ -48,6 +48,7 @@ public class SistemaRecarga {
                 r.setAdmin(admin);
                 
                 UsuarioPropietario usr = r.getPropietario();
+                
                 usr.aceptarRecarga(r,admin);
                 Fachada.getInstancia().avisar(Fachada.eventos.cambioListaRecargas);
                 //Crear notificacion

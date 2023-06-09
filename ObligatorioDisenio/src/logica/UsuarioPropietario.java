@@ -80,11 +80,15 @@ public class UsuarioPropietario extends Usuario{
     }
     
     public void aceptarRecarga(Recarga recarga,UsuarioAdministrador admin){
+        
         for(Recarga r:recargas){
-            if(r.equals(recarga))
+            if(r.equals(recarga)){
+                
                 r.setEstado(Recarga.EstadoRec.ACEPTADA); 
                 setSaldo(this.saldo+r.getMonto());
                 r.setAdmin(admin);
+            }
+            
         }
     }
     

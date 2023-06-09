@@ -380,6 +380,9 @@ public class TableroDeControl extends javax.swing.JFrame implements VistaTablero
             fila++;
        }
        tblRecargas.setModel(datos);
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(tblRecargas.getModel());
+        tblRecargas.setRowSorter(sorter);
+        sorter.setSortKeys(Collections.singletonList(new RowSorter.SortKey(0, SortOrder.DESCENDING)));
     }
 
     @Override
@@ -401,6 +404,9 @@ public class TableroDeControl extends javax.swing.JFrame implements VistaTablero
             fila++;
        }
        tablaBonificaciones.setModel(datos);
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(tablaBonificaciones.getModel());
+        tablaBonificaciones.setRowSorter(sorter);
+        sorter.setSortKeys(Collections.singletonList(new RowSorter.SortKey(0, SortOrder.DESCENDING)));
     }
 
     @Override
