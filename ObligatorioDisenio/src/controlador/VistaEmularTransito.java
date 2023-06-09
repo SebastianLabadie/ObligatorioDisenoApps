@@ -7,6 +7,7 @@ package controlador;
 import java.util.ArrayList;
 import logica.Puesto;
 import logica.Tarifa;
+import logica.Transito;
 
 /**
  *
@@ -17,6 +18,6 @@ public interface VistaEmularTransito {
     public void cargarPuestos(ArrayList<Puesto> puestos);
     public void cargarTarifasPuesto(ArrayList<Tarifa> tarifas);
     public void error(String message);
-    public void exito(String message);
+    public void exito(Transito t);
     
 }

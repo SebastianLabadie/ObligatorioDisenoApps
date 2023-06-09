@@ -54,7 +54,7 @@ public class SistemaTransito {
         puestos.add(p);
     }
 
-    public void agregarTransito(Puesto puesto,Vehiculo vehiculo, Tarifa tarifa,BonificacionAsignada bonificacion ) throws TransitoException{
+    public Transito agregarTransito(Puesto puesto,Vehiculo vehiculo, Tarifa tarifa,BonificacionAsignada bonificacion ) throws TransitoException{
         
         //Validar que usuario tenga saldo suficiente
             //bonificacion.getBonificacion().getNombre().contains(s)
@@ -71,7 +71,7 @@ public class SistemaTransito {
             throw new TransitoException("Saldo insuficiente: "+propietario.getSaldo());
         }
         
-        Transito t= new Transito(puesto, vehiculo, tarifa,bonificacion);
+        Transito t= new Transito(puesto, vehiculo, tarifa,bonificacion,costoTotal);
         transitos.add(t);
         propietario.setSaldo(propietario.getSaldo()-costoTotal);
         Fachada.getInstancia().avisar(Fachada.eventos.cambioListaTransitos);
@@ -87,6 +87,8 @@ public class SistemaTransito {
         }
         
         Fachada.getInstancia().avisar(Fachada.eventos.cambioListaNotificaciones);
+        
+        return t;
     }
     
     private int transitosPorPuestoYMatricula(Puesto p,Vehiculo v){

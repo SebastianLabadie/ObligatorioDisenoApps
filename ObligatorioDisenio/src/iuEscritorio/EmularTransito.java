@@ -18,6 +18,7 @@ import logica.BonificacionAsignada;
 import logica.Fachada;
 import logica.Puesto;
 import logica.Tarifa;
+import logica.Transito;
 import logica.UsuarioPropietario;
 import logica.Vehiculo;
 
@@ -31,9 +32,11 @@ public class EmularTransito extends javax.swing.JDialog implements VistaEmularTr
      * Creates new form EmularTransito
      */
     private ControladorEmularTransito controlador;
+    private java.awt.Frame parent;
     public EmularTransito(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.parent = parent;
         this.setLocationRelativeTo(null);
         this.controlador = new ControladorEmularTransito(this);
     }
@@ -196,8 +199,8 @@ public class EmularTransito extends javax.swing.JDialog implements VistaEmularTr
     }
     
     @Override
-    public void exito(String message) {
-        JOptionPane.showMessageDialog(this, message,"Exito",JOptionPane.INFORMATION_MESSAGE);
+    public void exito(Transito t) {
+        new TransitoExitoso(this.parent, false, t).setVisible(true);
     }
     
 

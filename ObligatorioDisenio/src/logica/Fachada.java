@@ -92,8 +92,8 @@ public class Fachada extends Observable{
         sTransito.agregarPuesto(nom, dir);
     }
     
-    public void agregarTransito(Puesto puesto,Vehiculo vehiculo, Tarifa tarifa,BonificacionAsignada bonificacion) throws TransitoException{
-        sTransito.agregarTransito(puesto, vehiculo, tarifa,bonificacion);
+    public Transito agregarTransito(Puesto puesto,Vehiculo vehiculo, Tarifa tarifa,BonificacionAsignada bonificacion) throws TransitoException{
+        return sTransito.agregarTransito(puesto, vehiculo, tarifa,bonificacion);
     }
     
     public Vehiculo obtenerVehiculoByMatricula(String matricula) throws NoExiste{

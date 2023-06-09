@@ -15,15 +15,15 @@ public class Transito {
     private Puesto puesto;
     private Vehiculo vehiculo;
     private Tarifa tarifa;
-    private int montoPagado;
+    private double montoPagado;
     private BonificacionAsignada bonificacion;
 
-    public Transito( Puesto puesto, Vehiculo vehiculo, Tarifa tarifa,BonificacionAsignada bonificacion) {
+    public Transito( Puesto puesto, Vehiculo vehiculo, Tarifa tarifa,BonificacionAsignada bonificacion,double montoPagado) {
         this.fechaIngreso = new Date();
         this.puesto = puesto;
         this.vehiculo = vehiculo;
         this.tarifa = tarifa;
-        this.montoPagado =0;
+        this.montoPagado =montoPagado;
         this.bonificacion = bonificacion;
     }
 
@@ -48,9 +48,10 @@ public class Transito {
         return tarifa;
     }
 
-    public int getMontoPagado() {
+    public double getMontoPagado() {
         return montoPagado;
     }
+    
 
     public void setMontoPagado(int montoPagado) {
         this.montoPagado = montoPagado;

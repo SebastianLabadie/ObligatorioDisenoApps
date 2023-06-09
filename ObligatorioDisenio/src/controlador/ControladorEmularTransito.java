@@ -14,6 +14,7 @@ import logica.BonificacionAsignada;
 import logica.Fachada;
 import logica.Puesto;
 import logica.Tarifa;
+import logica.Transito;
 import logica.UsuarioPropietario;
 import logica.Vehiculo;
 import observador.Observable;
@@ -67,8 +68,8 @@ public class ControladorEmularTransito{
             
 
 
-            Fachada.getInstancia().agregarTransito(p, v, tarifa, bonificacion);
-            vista.exito("Transito agregado con exito");
+            Transito transito = Fachada.getInstancia().agregarTransito(p, v, tarifa, bonificacion);
+            vista.exito(transito);
         } catch (NoExiste ex) {
             vista.error(ex.getMessage());
         } catch (TransitoException ex) {

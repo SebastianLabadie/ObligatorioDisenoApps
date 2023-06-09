@@ -8,7 +8,12 @@ import controlador.ControladorTableroDeControl;
 import controlador.VistaTableroDeControl;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import logica.BonificacionAsignada;
 import logica.Fachada;
 import logica.Notificacion;
@@ -348,6 +353,9 @@ public class TableroDeControl extends javax.swing.JFrame implements VistaTablero
             fila++;
        }
        tablaTransitos.setModel(datos);
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(tablaTransitos.getModel());
+        tablaTransitos.setRowSorter(sorter);
+        sorter.setSortKeys(Collections.singletonList(new RowSorter.SortKey(7, SortOrder.DESCENDING)));
     }
 
     @Override
