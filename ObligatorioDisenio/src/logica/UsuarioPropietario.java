@@ -51,6 +51,10 @@ public class UsuarioPropietario extends Usuario{
         notificaciones.add(n);
     }
     
+    public void eliminarNotificaciones(){
+        notificaciones.clear();
+    }
+    
     public void asociarVehiculo(Vehiculo v){
         vehiculos.add(v);
     }
@@ -83,5 +87,7 @@ public class UsuarioPropietario extends Usuario{
                 r.setAdmin(admin);
         }
     }
+    
+    
 
 }

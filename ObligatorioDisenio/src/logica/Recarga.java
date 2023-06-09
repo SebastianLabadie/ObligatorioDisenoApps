@@ -6,7 +6,7 @@ import observador.Observable;
 import observador.Observador;
 
 
-public class Recarga extends Observable{
+public class Recarga {
     public enum EstadoRec{
         PENDIENTE,
         ACEPTADA
@@ -26,8 +26,6 @@ public class Recarga extends Observable{
         this.estado = EstadoRec.PENDIENTE;
         this.admin = null;
         this.propietario = propietario;
-        avisar(eventos.cambioListaRecarga);
-        Fachada.getInstancia().avisar(Fachada.eventos.cambioListaRecargas);
         
     }
     

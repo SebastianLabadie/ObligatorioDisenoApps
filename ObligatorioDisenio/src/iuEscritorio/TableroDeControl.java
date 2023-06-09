@@ -69,6 +69,7 @@ public class TableroDeControl extends javax.swing.JFrame implements VistaTablero
         jScrollPane5 = new javax.swing.JScrollPane();
         tablaNotificaciones = new javax.swing.JTable();
         lCantNotificaciones = new javax.swing.JLabel();
+        btnBorrarNoti = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1051, 1000));
@@ -129,6 +130,13 @@ public class TableroDeControl extends javax.swing.JFrame implements VistaTablero
         lCantNotificaciones.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         lCantNotificaciones.setText("cNO");
 
+        btnBorrarNoti.setText("Borrar");
+        btnBorrarNoti.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBorrarNotiActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -151,7 +159,9 @@ public class TableroDeControl extends javax.swing.JFrame implements VistaTablero
                                     .addComponent(lCantVehiculos)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(btnRecargar)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnRecargar, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnBorrarNoti, javax.swing.GroupLayout.Alignment.TRAILING))))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 903, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -204,7 +214,10 @@ public class TableroDeControl extends javax.swing.JFrame implements VistaTablero
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lCantNotificaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lCantNotificaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnBorrarNoti))
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addComponent(btnCerrar)
@@ -229,6 +242,12 @@ public class TableroDeControl extends javax.swing.JFrame implements VistaTablero
         salir();
     }//GEN-LAST:event_formWindowClosing
 
+    private void btnBorrarNotiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarNotiActionPerformed
+        // TODO add your handling code here:
+        this.usuario.eliminarNotificaciones();
+        Fachada.getInstancia().avisar(Fachada.eventos.cambioListaNotificaciones);
+    }//GEN-LAST:event_btnBorrarNotiActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -240,6 +259,7 @@ public class TableroDeControl extends javax.swing.JFrame implements VistaTablero
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBorrarNoti;
     private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnRecargar;
     private javax.swing.JScrollPane jScrollPane1;
