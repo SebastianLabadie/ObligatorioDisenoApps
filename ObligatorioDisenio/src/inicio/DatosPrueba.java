@@ -6,6 +6,7 @@ package inicio;
 
 import Exceptions.BonificacionAsignadaException;
 import Exceptions.DuplicadoException;
+import Exceptions.NumeroNegativoException;
 import Exceptions.TransitoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,7 +23,7 @@ import logica.Vehiculo;
 public class DatosPrueba {
     private static Fachada fachada = Fachada.getInstancia();
     
-    public static void cargar(){
+    public static void cargar() {
         //CARGA DE USUARIOS
         UsuarioAdministrador admin1 = fachada.agregarUsuarioAdministrador("a", "a", "Admin1");
         UsuarioAdministrador admin2 =  fachada.agregarUsuarioAdministrador("b", "b", "Admin2");
@@ -39,16 +40,24 @@ public class DatosPrueba {
             
             //CARGA DE VEHICULOS
             Vehiculo v1 = fachada.agregarVehiculo("MAT01", "ROJO", "MOD1",fachada.obtenerCategoriasVehiculos().get(0));
-            Vehiculo v2 = fachada.agregarVehiculo("MAT02", "ROJO", "MOD1",fachada.obtenerCategoriasVehiculos().get(0));
-            Vehiculo v3 = fachada.agregarVehiculo("MAT03", "ROJO", "MOD1",fachada.obtenerCategoriasVehiculos().get(1));
+            Vehiculo v2 = fachada.agregarVehiculo("MAT02", "ROJO", "MOD1",fachada.obtenerCategoriasVehiculos().get(1));
+            Vehiculo v3 = fachada.agregarVehiculo("MAT03", "ROJO", "MOD1",fachada.obtenerCategoriasVehiculos().get(2));
             Vehiculo v4 = fachada.agregarVehiculo("MAT04", "ROJO", "MOD1",fachada.obtenerCategoriasVehiculos().get(0));
+            Vehiculo v5 = fachada.agregarVehiculo("MAT05", "ROJO", "MOD1",fachada.obtenerCategoriasVehiculos().get(1));
+            Vehiculo v6 = fachada.agregarVehiculo("MAT05", "ROJO", "MOD1",fachada.obtenerCategoriasVehiculos().get(2));
             
             propietario1.asociarVehiculo(v1);
-            propietario2.asociarVehiculo(v2);
-            propietario2.asociarVehiculo(v3);
+            propietario1.asociarVehiculo(v2);
+            propietario1.asociarVehiculo(v3);
+            propietario2.asociarVehiculo(v4);
+            propietario2.asociarVehiculo(v5);
+            propietario2.asociarVehiculo(v6);
             v1.asignarPropietario(propietario1);
-            v2.asignarPropietario(propietario2);
-            v3.asignarPropietario(propietario2);
+            v2.asignarPropietario(propietario1);
+            v3.asignarPropietario(propietario1);
+            v4.asignarPropietario(propietario2);
+            v5.asignarPropietario(propietario2);
+            v6.asignarPropietario(propietario2);
             
             
             //CARGA DE TARIFAS
@@ -85,9 +94,19 @@ public class DatosPrueba {
             //ASIGNAR BONIFICACIONES
             fachada.crearBonificacionAsignada(fachada.obtenerPuestos().get(0), fachada.obtenerBonificaciones().get(4), propietario1);
             
+            fachada.crearBonificacionAsignada(fachada.obtenerPuestos().get(1), fachada.obtenerBonificaciones().get(5), propietario1);
+            
+            fachada.crearBonificacionAsignada(fachada.obtenerPuestos().get(1), fachada.obtenerBonificaciones().get(4), propietario2);
+            fachada.crearBonificacionAsignada(fachada.obtenerPuestos().get(1), fachada.obtenerBonificaciones().get(0), propietario2);
             
             //AGREGAR TRANSITO PRUEBA
             fachada.agregarTransito(fachada.obtenerPuestos().get(0), v1, fachada.obtenerTarifas().get(0),propietario1.obtenerBonificacionesAsignadas().get(0));
+            
+            //Recargas
+            fachada.agregarRecarga(100, propietario2);
+            fachada.agregarRecarga(300, propietario1);
+            fachada.agregarRecarga(300, propietario1);
+            fachada.agregarRecarga(1000, propietario2);
             
         }
         catch (DuplicadoException ex) {
@@ -95,6 +114,8 @@ public class DatosPrueba {
         } catch (TransitoException ex) {
             Logger.getLogger(DatosPrueba.class.getName()).log(Level.SEVERE, null, ex);
         } catch (BonificacionAsignadaException ex) {
+            Logger.getLogger(DatosPrueba.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NumeroNegativoException ex) {
             Logger.getLogger(DatosPrueba.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
