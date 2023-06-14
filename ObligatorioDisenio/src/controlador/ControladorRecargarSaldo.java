@@ -21,6 +21,7 @@ public class ControladorRecargarSaldo implements Observador{
     public ControladorRecargarSaldo(VistaRecargarSaldo vista,UsuarioPropietario usr) {
         this.vista = vista;
         this.usr = usr;
+        Fachada.getInstancia().agregarObservador(this);
         cargarDatosDelUsr();
     }
     
@@ -41,7 +42,10 @@ public class ControladorRecargarSaldo implements Observador{
     
     @Override
     public void actualizar(Object evento, Observable origen) {
-       
+      if(evento.equals(Fachada.eventos.cambioListaRecargas)){
+            cargarDatosDelUsr();
+            
+        }
     }
     
     
